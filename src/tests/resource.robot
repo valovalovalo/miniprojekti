@@ -1,6 +1,5 @@
 *** Settings ***
 Library  SeleniumLibrary
-Library  ./AppLibrary.py
 
 *** Variables ***
 ${SERVER}     localhost:5001
@@ -12,7 +11,7 @@ ${BROWSER}    chrome
 ${HEADLESS}   false
 
 *** Keywords ***
-Open And Configure Browser And Setup Database
+Open And Configure Browser
     IF  $BROWSER == 'chrome'
         ${options}  Evaluate  sys.modules['selenium.webdriver'].ChromeOptions()  sys
     ELSE IF  $BROWSER == 'firefox'
@@ -25,6 +24,4 @@ Open And Configure Browser And Setup Database
         Set Selenium Speed  ${DELAY}
     END
     Open Browser  browser=${BROWSER}  options=${options}
-    Setup Database
-    Reset Database
 

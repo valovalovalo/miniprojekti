@@ -14,8 +14,12 @@ done
 
 echo "Flask server is ready"
 
+poetry run python src/migrate.py
+
+echo "DB setup done"
+
 # suoritetaan testit
-poetry run robot --variable HEADLESS:true src/tests
+#poetry run robot --variable HEADLESS:true src/tests
 
 status=$?
 

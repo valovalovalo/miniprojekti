@@ -12,6 +12,9 @@ def table_exists(name):
     ")"
   )
 
+  print(f"Checking if table {name} exists")
+  print(sql_table_existence)
+
   result = db.session.execute(sql_table_existence)
   return result.fetchall()[0][0]
 
