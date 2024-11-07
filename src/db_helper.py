@@ -1,4 +1,4 @@
-from setup import db
+from setup import db, app
 from sqlalchemy import text
 
 table_name = "todos"
@@ -42,3 +42,7 @@ def setup_db():
 
   db.session.execute(sql)
   db.session.commit()
+
+if __name__ == "__main__":
+    with app.app_context():
+      setup_db()
