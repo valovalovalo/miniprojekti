@@ -2,6 +2,10 @@
 
 echo "Running tests"
 
+poetry run python src/migrate.py
+
+echo "DB setup done"
+
 # käynnistetään Flask-palvelin taustalle
 poetry run python3 src/index.py &
 
@@ -13,10 +17,6 @@ while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:5001)" != "200" ]
 done
 
 echo "Flask server is ready"
-
-poetry run python src/migrate.py
-
-echo "DB setup done"
 
 # suoritetaan testit
 #poetry run robot --variable HEADLESS:true src/tests
