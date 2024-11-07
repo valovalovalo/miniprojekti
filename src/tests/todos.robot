@@ -2,7 +2,7 @@
 Resource  resource.robot
 Suite Setup      Open And Configure Browser And Setup Database
 Suite Teardown   Close Browser
-Test Setup       Reset Todos
+#Test Setup       Reset Todos
 
 *** Test Cases ***
 At start there are no todos
