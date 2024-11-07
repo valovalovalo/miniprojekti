@@ -1,4 +1,4 @@
-from db_helper import reset_db, setup_db
+from db_helper import setup_db
 from setup import app
 
 def setup_database():

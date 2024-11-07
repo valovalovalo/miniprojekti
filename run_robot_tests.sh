@@ -3,7 +3,7 @@
 echo "Running tests"
 
 # luodaan tietokanta
-poetry run python src/migrate.py
+poetry run python src/create_database.py
 
 echo "DB setup done"
 

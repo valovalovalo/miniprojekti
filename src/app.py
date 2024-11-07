@@ -1,5 +1,5 @@
 from flask import redirect, render_template, request, jsonify
-from db_helper import reset_db, setup_db
+from db_helper import reset_db
 from repositories.todo_repository import get_todos, create_todo
 
 from setup import app, test_env
@@ -29,13 +29,7 @@ def todo_creation():
     #    return redirect_to_login()
 
 # testausta varten olevat reitit
-if True:
-    @app.route("/setup_db")
-    def setup_database():
-        setup_db()
-        print("setup db")
-        return jsonify({ 'message': "db setup done" })
-
+if test_env:
     @app.route("/reset_db")
     def reset_database():
         reset_db()
