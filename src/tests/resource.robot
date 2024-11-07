@@ -1,5 +1,6 @@
 *** Settings ***
 Library  SeleniumLibrary
+Library  ./AppLibrary.py
 
 *** Variables ***
 ${SERVER}     localhost:5001
@@ -25,9 +26,5 @@ Open And Configure Browser And Setup Database
     END
     Open Browser  browser=${BROWSER}  options=${options}
     Setup Database
+    Reset Database
 
-Setup Database
-    Go To  ${SETUP_URL}
-
-Reset Todos
-    Go To  ${RESET_URL}
