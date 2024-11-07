@@ -1,8 +1,8 @@
-from flask import redirect, render_template, request, jsonify
+from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
 from repositories.todo_repository import get_todos, create_todo
-
 from setup import app, test_env
+from util import validate_todo
 
 @app.route("/")
 def index():
@@ -17,18 +17,16 @@ def new():
 @app.route("/create_todo", methods=["POST"])
 def todo_creation():
     content = request.form.get("content")
-    create_todo(content)
 
-    return redirect("/")
+    try:
+        validate_todo(content)
+        create_todo(content)
+        return redirect("/")
+    except Exception as error:
+        flash(str(error))
+        return  redirect("/new_todo")
 
-    #try:
-    #    user_service.check_credentials(username, password)
-    #    return redirect_to_ohtu()
-    #except Exception as error:
-    #    flash(str(error))
-    #    return redirect_to_login()
-
-# testausta varten olevat reitit
+# testausta varten oleva reitti
 if test_env:
     @app.route("/reset_db")
     def reset_database():
