@@ -11,7 +11,7 @@ ${BROWSER}    chrome
 ${HEADLESS}   false
 
 *** Keywords ***
-Open And Configure Browser
+Open And Configure Browser And Setup Database
     IF  $BROWSER == 'chrome'
         ${options}  Evaluate  sys.modules['selenium.webdriver'].ChromeOptions()  sys
     ELSE IF  $BROWSER == 'firefox'
