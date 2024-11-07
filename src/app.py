@@ -29,7 +29,7 @@ def todo_creation():
     #    return redirect_to_login()
 
 # testausta varten olevat reitit
-if test_env:
+if True:
     @app.route("/setup_db")
     def setup_database():
         setup_db()

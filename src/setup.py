@@ -6,8 +6,7 @@ from os import getenv
 
 load_dotenv()
 
-secret_key = getenv("SECRET_KEY")
-test_env = getenv("TEST_ENV") == "True"
+test_env = getenv("TEST_ENV") == "true"
 print(f"Test environment: {test_env}")
 
 app = Flask(__name__)
