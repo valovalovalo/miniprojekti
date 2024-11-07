@@ -37,7 +37,7 @@ jobs:
       - name: Install Poetry
         run: pip install poetry
       - name: Run unit tests
-        uses: pytest src/tests
+        run: pytest src/tests
       - name: Setup chromedriver
         uses: nanasess/setup-chromedriver@master
       - run: |
