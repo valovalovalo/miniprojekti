@@ -2,6 +2,7 @@
 
 echo "Running tests"
 
+# luodaan tietokanta
 poetry run python src/migrate.py
 
 echo "DB setup done"
@@ -19,7 +20,7 @@ done
 echo "Flask server is ready"
 
 # suoritetaan testit
-#poetry run robot --variable HEADLESS:true src/tests
+poetry run robot --variable HEADLESS:true src/tests
 
 status=$?
 
