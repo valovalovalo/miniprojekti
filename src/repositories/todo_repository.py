@@ -1,4 +1,4 @@
-from setup import db
+from config import db
 from sqlalchemy import text
 
 from entities.todo import Todo

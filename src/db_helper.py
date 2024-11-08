@@ -1,4 +1,4 @@
-from setup import db, app
+from config import db, app
 from sqlalchemy import text
 
 table_name = "todos"
