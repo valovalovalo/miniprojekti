@@ -1,34 +1,25 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Todo app
+  Reference Manager
 {% endblock %}
 
 {% block body %}
 
-<h2>Todo app</h2>
-
-<div>
-  things still unfinished: {{ unfinished }}
-</div>
+<h2>Reference Manager app</h2>
 
 <ul>
-  {% for todo in todos %}
+  {% for ref in references %}
     <li style="display: flex">
       <div>
-        {{ todo }} 
+        {{ ref }} 
       </div>
-      {% if not todo.done %}
-        <form action="/toggle_todo/{{ todo.id }}" method="post" style="margin-left: 10px;">
-          <button type="submit">mark as done</button>
-        </form>
-      {% endif %}
     </li>
   {% endfor %}
 </ul>
 
 <div>
-  <a href="/new_todo">Create new todo</a>
+  <a href="/new_reference">Create a new reference</a>
 </div>
 
 {% endblock %}

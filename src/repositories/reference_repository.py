@@ -1,19 +1,30 @@
-from config import db
 from sqlalchemy import text
 
-from entities.todo import Todo
+from config import db
+from entities.reference import Reference
 
-def get_todos():
-    result = db.session.execute(text("SELECT id, content, done FROM todos"))
-    todos = result.fetchall()
-    return [Todo(todo[0], todo[1], todo[2]) for todo in todos] 
 
-def set_done(todo_id):
-    sql = text("UPDATE todos SET done = TRUE WHERE id = :id")
-    db.session.execute(sql, { "id": todo_id })
-    db.session.commit()
+def get_references():
+    result = db.session.execute(
+        text("SELECT id, entry_type, title, authors, year FROM reference_entries")
+    )
+    references = result.fetchall()
+    return [
+        Reference(reference[0], reference[1], reference[2], reference[3], reference[4])
+        for reference in references
+    ]
 
-def create_todo(content):
-    sql = text("INSERT INTO todos (content) VALUES (:content)")
-    db.session.execute(sql, { "content": content })
+
+def create_reference(entry_type, title, authors, year):
+    sql = text(
+        """
+        INSERT INTO reference_entries (entry_type, title, authors, year) 
+        VALUES (:entry_type, :title, :authors, :year)
+    """
+    )
+
+    db.session.execute(
+        sql,
+        {"entry_type": entry_type, "title": title, "authors": authors, "year": year},
+    )
     db.session.commit()
