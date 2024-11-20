@@ -13,18 +13,20 @@ Vaatimuksena Python >=3.10.0, Poetry ja PostgreSQL-tietokanta.
 Konfiguroi PostgreSQL-tietokanta ja täydennä sen tiedot .env -tiedostoon.
 
 Seuraavat komennot asentavat sovelluksen riippuvuudet ja alustaa tietokannan.
-...
+
+```
 poetry install
 poetry shell
 python src/db_helper.py
-...
+```
 
 ## Käyttäminen
 
 Sovellus käynnistetään seuraavasti:
-...
+
+```
 poetry shell
 python src/index.py
-...
+```
 
 Sovellus löytyy osoitteesta localhost:5001.
