@@ -5,6 +5,7 @@ Lue [täältä](https://ohjelmistotuotanto-hy.github.io/flask/) lisää.
 ## Linkkejä
 
 [Backlog](https://github.com/orgs/valovalovalo/projects/1)
+[Definition of Done](https://github.com/valovalovalo/miniprojekti/wiki/Definition-Of-Done)
 
 ## Asentaminen
 
@@ -12,7 +13,7 @@ Vaatimuksena Python >=3.10.0, Poetry ja PostgreSQL-tietokanta.
 
 Konfiguroi PostgreSQL-tietokanta ja täydennä sen tiedot .env -tiedostoon.
 
-Seuraavat komennot asentavat sovelluksen riippuvuudet ja alustaa tietokannan.
+Seuraavat komennot asentavat sovelluksen riippuvuudet ja alustaa tietokannan:
 
 ```
 poetry install
@@ -29,4 +30,4 @@ poetry shell
 python src/index.py
 ```
 
-Sovellus löytyy osoitteesta localhost:5001.
+Sovellus löytyy osoitteesta localhost:5001
