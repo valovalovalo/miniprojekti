@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Create a new reference
+{% endblock %}
+
+{% block body %}
+
+<h2>Create a new reference</h2>
+
+<form action="/create_reference" method="post">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+    <div>
+        <label for="entry_type">Type:</label>
+        <select name="entry_type" id="entry_type" required>
+            <option value="article">Article</option>
+            <option value="book">Book</option>
+            <option value="inproceedings">Conference Paper</option>
+            <option value="thesis">Thesis</option>
+            <option value="misc">Other</option>
+        </select>
+    </div>
+    
+    <div>
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="title" required>
+    </div>
+    
+    <div>
+        <label for="authors">Authors:</label>
+        <input type="text" name="authors" id="authors" 
+               placeholder="e.g. John Doe, Jane Smith" required>
+    </div>
+    
+    <div>
+        <label for="year">Year:</label>
+        <input type="number" name="year" id="year" 
+               min="1900" max="2024" required>
+    </div>
+    
+    <button type="submit">Create Reference</button>
+</form>
+{% endblock %}
