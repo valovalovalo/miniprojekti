@@ -1,6 +1,6 @@
 from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
-from repositories.reference_repository import get_references, create_reference
+from repositories.reference_repository import get_references, create_reference, get_reference_by_id
 from config import app, test_env
 from util import validate_reference
 
@@ -23,6 +23,17 @@ def index():
 
     references = get_references()
     return render_template("index.html", references=references)
+
+
+@app.route("/reference/<reference_id>", methods=["POST", "GET"])
+def reference(reference_id):
+    if request.method == "GET":
+        reference = get_reference_by_id(reference_id)
+
+        return render_template("reference.html", content=reference, reference_id=reference_id)
+
+        # reference = references.get_reference(id) tms
+        # 
 
 @app.route("/new_reference")
 def new():

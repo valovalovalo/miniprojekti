@@ -15,6 +15,19 @@ def get_references():
     ]
 
 
+def get_reference_by_id(reference_id):
+    query = text("""
+                SELECT id, entry_type, title, authors, year FROM reference_entries WHERE reference_entries.id = (:reference_id)
+                """)
+    query_result = db.session.execute(query, {"reference_id":reference_id})
+    reference = query_result.fetchone()
+    print(reference)
+
+    return [
+        Reference(reference[0], reference[1], reference[2], reference[3], reference[4])
+    ]
+
+
 def create_reference(entry_type, title, authors, year):
     sql = text(
         """

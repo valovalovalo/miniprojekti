@@ -15,13 +15,8 @@
       <strong>Title:</strong> {{ ref['title'] }}<br>
       <strong>Authors:</strong> {{ ref['authors'] }}<br>
       <strong>Year:</strong> {{ ref['year'] }}
-      <a href="/reference/{{ ref['id'] }}">View reference </a>
     </li>
   {% endfor %}
 </ul>
-
-<div>
-  <a href="/new_reference">Create a new reference</a>
-</div>
 
 {% endblock %}
