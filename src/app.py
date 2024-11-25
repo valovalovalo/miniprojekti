@@ -1,18 +1,19 @@
-from flask import redirect, render_template, request, jsonify, flash
-from db_helper import reset_db
-from repositories.reference_repository import get_references, create_reference
+from flask import flash, jsonify, redirect, render_template, request
+
 from config import app, test_env
+from db_helper import reset_db
+from repositories.reference_repository import reference_repo
 from util import validate_reference
+
 
 @app.route("/")
 def index():
-
     """
     Render the index page.
 
     ---
 
-    Fetches all references from the database using `get_references` and 
+    Fetches all references from the database using `get_references` and
     passes them to the "index.html" template for rendering.
 
     ---
@@ -21,8 +22,9 @@ def index():
         Response: Rendered HTML page with a list of references.
     """
 
-    references = get_references()
+    references = reference_repo.get_references()
     return render_template("index.html", references=references)
+
 
 @app.route("/new_reference")
 def new():
@@ -39,8 +41,9 @@ def new():
     Returns:
         Response: Rendered HTML page for creating a new reference.
     """
-     
+
     return render_template("new_reference.html")
+
 
 @app.route("/create_reference", methods=["POST"])
 def reference_creation():
@@ -49,8 +52,8 @@ def reference_creation():
 
     ---
 
-    Retrieves reference data from the request form, validates it, and 
-    creates a new reference in the database. Redirects to the home page on 
+    Retrieves reference data from the request form, validates it, and
+    creates a new reference in the database. Redirects to the home page on
     success or back to the new reference page on failure.
 
     ---
@@ -59,7 +62,7 @@ def reference_creation():
         POST: Accepts data for the new reference from an HTML form.
 
     Returns:
-        Response: Redirect to the home page ("/") on success, or to 
+        Response: Redirect to the home page ("/") on success, or to
                   "/new_reference" with an error message on failure.
     """
 
@@ -70,11 +73,12 @@ def reference_creation():
 
     try:
         # validate_reference(entry_type, title, authors, year)
-        create_reference(entry_type, title, authors, year)
+        reference_repo.create_reference(entry_type, title, authors, year)
         return redirect("/")
     except Exception as error:
         flash(str(error))
-        return  redirect("/new_reference")
+        return redirect("/new_reference")
+
 
 @app.route("/update_reference/<reference_id>", methods=["POST"])
 def update_reference(reference_id):
@@ -82,11 +86,12 @@ def update_reference(reference_id):
     Not implemented yet.
     """
 
-
     return redirect("/")
+
 
 # testausta varten oleva reitti
 if test_env:
+
     @app.route("/reset_db")
     def reset_database():
         """
@@ -94,7 +99,7 @@ if test_env:
 
         ---
 
-        Clears the database by calling `reset_db` and returns a success 
+        Clears the database by calling `reset_db` and returns a success
         message in JSON format. Only available in testing environments.
 
         ---
@@ -103,4 +108,4 @@ if test_env:
             Response: JSON object with a success message.
         """
         reset_db()
-        return jsonify({ "message": "db reset" })
+        return jsonify({"message": "db reset"})
