@@ -69,7 +69,7 @@ def reference_creation():
     year = request.form.get("year")
 
     try:
-        # validate_reference(entry_type, title, authors, year)
+        validate_reference(entry_type, title, authors, year)
         create_reference(entry_type, title, authors, year)
         return redirect("/")
     except Exception as error:
