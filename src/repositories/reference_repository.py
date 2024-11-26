@@ -5,8 +5,8 @@ from entities.reference import Reference
 
 
 class ReferenceRepository:
-    def __init__(self, db):
-        self.db = db
+    def __init__(self, database):
+        self.db = database
 
     def get_references(self):
         result = self.db.session.execute(
@@ -38,5 +38,6 @@ class ReferenceRepository:
             },
         )
         self.db.session.commit()
+
 
 reference_repo = ReferenceRepository(db)
