@@ -28,13 +28,14 @@ def index():
 
 @app.route("/reference/<reference_id>", methods=["POST", "GET"])
 def reference(reference_id):
+    """
+    Render the page for viewing single references
+    """
+
     if request.method == "GET":
         reference = reference_repo.get_reference_by_id(reference_id)
     
         return render_template("reference.html", reference=reference[0])
-
-        # reference = references.get_reference(id) tms
-        # 
 
 @app.route("/new_reference")
 def new():
