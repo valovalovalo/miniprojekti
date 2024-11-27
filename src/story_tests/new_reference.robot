@@ -5,11 +5,11 @@ Suite Teardown  Close Browser
 Test Setup  Reset References
 
 *** Test Cases ***
-At start there are no references
+At Start There Are No References
     Go To  ${HOME_URL}
     Page Should Not Contain Element  xpath=//li
 
-After adding a reference, site displays it
+After Adding A Reference, Site Displays It
     Go To  ${HOME_URL}
     Click Link  Create a new reference
     Input Text  title  test1
@@ -18,13 +18,13 @@ After adding a reference, site displays it
     Click Button  Create Reference
     Page Should Contain  test1
 
-Test for empty input fields
+Test For Empty Input Fields
     Go To  ${HOME_URL}
     Click Link  Create a new reference
     Click Button  Create Reference
     Location Should Be  ${NEW_REFERENCE_URL}
 
-Test for invalid input year
+Test For Invalid Input Year
     Go To  ${HOME_URL}
     Click Link  Create a new reference
     Input Text  title  test2
