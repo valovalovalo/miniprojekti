@@ -10,10 +10,11 @@
 
 <ul>
   {% for ref in references %}
-    <li style="display: flex">
-      <div>
-        {{ ref }} 
-      </div>
+    <li style="margin-bottom: 15px;">
+      <strong>Type:</strong> {{ ref['entry_type'] }}<br>
+      <strong>Title:</strong> {{ ref['title'] }}<br>
+      <strong>Authors:</strong> {{ ref['authors'] }}<br>
+      <strong>Year:</strong> {{ ref['year'] }}
     </li>
   {% endfor %}
 </ul>

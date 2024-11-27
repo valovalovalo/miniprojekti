@@ -1,6 +1,7 @@
 [MASTER]
 
-ignore=tests
+ignore=tests, story_tests
+
 
 [MESSAGE CONTROL]
 
@@ -14,13 +15,13 @@ disable=raw-checker-failed,
         use-symbolic-message-instead,
         missing-module-docstring,
         missing-function-docstring,
-        missing-class-docstring
-
+        missing-class-docstring,
+        too-few-public-methods
 [FORMAT]
 max-line-length=100
 
 [REFACTORING]
-max-nexted-blocks=2
+max-nested-blocks=2
 
 [DESIGN]
 max-statements=15

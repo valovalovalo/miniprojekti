@@ -2,7 +2,8 @@ from sqlalchemy import text
 
 from config import app, db
 
-table_name = "reference_entries"
+TABLE_NAME = "reference_entries"
+
 
 
 def table_exists(name):
@@ -54,8 +55,10 @@ def reset_db():
 
     """
 
-    print(f"Clearing contents from table {table_name}")
-    sql = text(f"DELETE FROM {table_name}")
+
+    print(f"Clearing contents from table {TABLE_NAME}")
+    sql = text(f"DELETE FROM {TABLE_NAME}")
+
     db.session.execute(sql)
     db.session.commit()
 
@@ -84,15 +87,15 @@ def setup_db():
 
     """
 
-    if table_exists(table_name):
-        print(f"Table {table_name} exists, dropping")
-        sql = text(f"DROP TABLE {table_name}")
+    if table_exists(TABLE_NAME):
+        print(f"Table {TABLE_NAME} exists, dropping")
+        sql = text(f"DROP TABLE {TABLE_NAME}")
         db.session.execute(sql)
         db.session.commit()
 
-    print(f"Creating table {table_name}")
+    print(f"Creating table {TABLE_NAME}")
     sql = text(f"""
-    CREATE TABLE {table_name} (
+    CREATE TABLE {TABLE_NAME} (
         id SERIAL PRIMARY KEY,
         entry_type VARCHAR(50) NOT NULL,
         title TEXT NOT NULL,
