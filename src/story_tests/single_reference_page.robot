@@ -25,7 +25,7 @@ Test If Single Page View Works
     Input Text  authors  Lassi
     Input Text  year  2000
     Click Button  Create Reference
-    Click Link  View reference Taru sormusten herrasta
+    Click Link  View reference
     Page Should Contain  Taru sormusten herrasta
     Page Should Contain  Lassi
     Page Should Contain  2000
@@ -37,6 +37,6 @@ Test If Back To Home Page Button Works
     Input Text  authors  Lassi
     Input Text  year  2000
     Click Button  Create Reference
-    Click Link  View reference Taru sormusten herrasta
+    Click Link  View reference
     Click Link  Back to home page
     Page Should Contain  Create a new reference
