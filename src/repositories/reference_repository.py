@@ -39,5 +39,20 @@ class ReferenceRepository:
         )
         self.db.session.commit()
 
+    def remove_reference(self, reference_id):
+        sql = text(
+            """
+            DELETE FROM reference_entries WHERE id = :id
+            """
+        )
+
+        self.db.session.execute(
+            sql,
+            {
+                "id": reference_id
+            }
+        )
+        self.db.session.commit()
+
 
 reference_repo = ReferenceRepository(db)
