@@ -8,15 +8,17 @@
 
 <h2>Reference Manager app</h2>
 
+<a href="/"> Back to home page </a>
+
 <ul>
-  {% for ref in references %}
+  {% if reference %}
     <li style="margin-bottom: 15px;">
-      <strong>Type:</strong> {{ ref['entry_type'] }}<br>
-      <strong>Title:</strong> {{ ref['title'] }}<br>
-      <strong>Authors:</strong> {{ ref['authors'] }}<br>
-      <strong>Year:</strong> {{ ref['year'] }}
+      <strong>Type:</strong> {{ reference['entry_type'] }}<br>
+      <strong>Title:</strong> {{ reference['title'] }}<br>
+      <strong>Authors:</strong> {{ reference['authors'] }}<br>
+      <strong>Year:</strong> {{ reference['year'] }}
     </li>
-  {% endfor %}
+{% endif %}
 </ul>
 
 {% endblock %}
