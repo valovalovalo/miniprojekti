@@ -26,6 +26,17 @@ def index():
     return render_template("index.html", references=references)
 
 
+@app.route("/reference/<reference_id>", methods=["POST", "GET"])
+def reference(reference_id):
+    """
+    Render the page for viewing single references
+    """
+
+    if request.method == "GET":
+        reference = reference_repo.get_reference_by_id(reference_id)
+    
+        return render_template("reference.html", reference=reference[0])
+
 @app.route("/new_reference")
 def new():
     """
@@ -41,9 +52,8 @@ def new():
     Returns:
         Response: Rendered HTML page for creating a new reference.
     """
-
+     
     return render_template("new_reference.html")
-
 
 @app.route("/create_reference", methods=["POST"])
 def reference_creation():
@@ -52,8 +62,8 @@ def reference_creation():
 
     ---
 
-    Retrieves reference data from the request form, validates it, and
-    creates a new reference in the database. Redirects to the home page on
+    Retrieves reference data from the request form, validates it, and 
+    creates a new reference in the database. Redirects to the home page on 
     success or back to the new reference page on failure.
 
     ---
@@ -62,7 +72,7 @@ def reference_creation():
         POST: Accepts data for the new reference from an HTML form.
 
     Returns:
-        Response: Redirect to the home page ("/") on success, or to
+        Response: Redirect to the home page ("/") on success, or to 
                   "/new_reference" with an error message on failure.
     """
 
