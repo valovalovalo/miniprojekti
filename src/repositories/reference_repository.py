@@ -13,6 +13,7 @@ class ReferenceRepository:
             text("SELECT id, entry_type, title, authors, year FROM reference_entries")
         )
         references = result.fetchall()
+
         return [
             Reference(
                 reference[0], reference[1], reference[2], reference[3], reference[4]
@@ -26,10 +27,11 @@ class ReferenceRepository:
                 """)
         query_result = self.db.session.execute(query, {"reference_id":reference_id})
         reference = query_result.fetchone()
-        print(reference)
 
         return [
-            Reference(reference[0], reference[1], reference[2], reference[3], reference[4])
+            Reference(
+                reference[0], reference[1], reference[2], reference[3], reference[4]
+            )
         ]
 
     def create_reference(self, entry_type, title, authors, year):

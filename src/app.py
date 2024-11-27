@@ -30,8 +30,8 @@ def index():
 def reference(reference_id):
     if request.method == "GET":
         reference = reference_repo.get_reference_by_id(reference_id)
-
-        return render_template("reference.html", content=reference, reference_id=reference_id)
+    
+        return render_template("reference.html", reference=reference[0])
 
         # reference = references.get_reference(id) tms
         # 
