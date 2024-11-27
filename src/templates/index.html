@@ -8,21 +8,29 @@
 
 <h2>Reference Manager app</h2>
 
-<ul>
-  {% for ref in references %}
-    <li style="margin-bottom: 15px;">
-      <strong>Type:</strong> {{ ref['entry_type'] }}<br>
-      <strong>Title:</strong> {{ ref['title'] }}<br>
-      <strong>Authors:</strong> {{ ref['authors'] }}<br>
-      <strong>Year:</strong> {{ ref['year'] }}
+<table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%;">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Authors</th>
+      <th>Year</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for ref in references %}
+    <tr>
+      <td>{{ ref['title'] }}</td>
+      <td>{{ ref['authors'] }}</td>
+      <td>{{ ref['year'] }}</td>
+      <td>
+        <a href="/reference/{{ ref['id'] }}">View reference</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
-      <a href="/reference/{{ ref['id'] }}">View reference {{ ref['title'] }}</a>
-
-    </li>
-  {% endfor %}
-</ul>
-
-<div>
+<div style="margin-top: 20px;">
   <a href="/new_reference">Create a new reference</a>
 </div>
 

@@ -18,7 +18,14 @@
       <strong>Authors:</strong> {{ reference['authors'] }}<br>
       <strong>Year:</strong> {{ reference['year'] }}
     </li>
-{% endif %}
+
+    <form action="/remove_reference/{{ reference['id'] }}" method="POST" style="margin-top: 20px;">
+      <button type="submit" style="background-color: rgb(250, 249, 249); color: rgb(8, 8, 8); border: 2px solid black; padding: 10px; cursor: pointer;">
+        Delete this reference
+      </button>
+    </form>
+
+  {% endif %}
 </ul>
 
 {% endblock %}
