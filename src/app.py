@@ -26,6 +26,17 @@ def index():
     return render_template("index.html", references=references)
 
 
+@app.route("/reference/<reference_id>", methods=["POST", "GET"])
+def reference(reference_id):
+    """
+    Render the page for viewing single references
+    """
+
+    if request.method == "GET":
+        reference = reference_repo.get_reference_by_id(reference_id)
+    
+        return render_template("reference.html", reference=reference[0])
+
 @app.route("/new_reference")
 def new():
     """
@@ -73,13 +84,13 @@ def reference_creation():
     year = request.form.get("year")
 
     try:
-
         validate_reference(entry_type, title, authors, year)
-        create_reference(entry_type, title, authors, year)
+        reference_repo.create_reference(entry_type, title, authors, year)
         return redirect("/")
     except Exception as error:
         flash(str(error))
-        return  redirect("/new_reference")
+        return redirect("/new_reference")
+
 
 @app.route("/update_reference/<reference_id>", methods=["POST"])
 def update_reference(reference_id):
@@ -88,6 +99,16 @@ def update_reference(reference_id):
     """
 
     return redirect("/")
+
+@app.route("/remove_reference/<reference_id>", methods=["POST"])
+def remove_reference(reference_id):
+    try:
+        reference_repo.remove_reference(reference_id)
+        flash("Viite poistettu onnistuneesti!")
+        return redirect("/")
+    except Exception as error:
+        flash(str(error))
+        return redirect("/")
 
 
 # testausta varten oleva reitti
@@ -109,6 +130,6 @@ if test_env:
             Response: JSON object with a success message.
         """
         reset_db()
-        
+
         return jsonify({"message": "db reset"})
 

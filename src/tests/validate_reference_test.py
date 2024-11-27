@@ -1,6 +1,7 @@
 import unittest
 from util import validate_reference, UserInputError
 
+
 class TestValidateReference(unittest.TestCase):
     def setUp(self):
         self.valid_entry_type = "book"

@@ -37,3 +37,11 @@ class TestReferenceRepository(unittest.TestCase):
 
         self.mock_db.session.execute.assert_called_once()
         self.mock_db.session.commit.assert_called_once()
+
+
+    def test_viitteen_poisto_onnistuu(self):
+        self.repo.remove_reference(1)
+
+        self.mock_db.session.execute.assert_called_once()
+        self.mock_db.session.commit.assert_called_once()
+

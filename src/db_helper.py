@@ -5,7 +5,6 @@ from config import app, db
 TABLE_NAME = "reference_entries"
 
 
-
 def table_exists(name):
 
     """

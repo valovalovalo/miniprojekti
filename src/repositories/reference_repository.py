@@ -13,11 +13,33 @@ class ReferenceRepository:
             text("SELECT id, entry_type, title, authors, year FROM reference_entries")
         )
         references = result.fetchall()
+
         return [
             Reference(
                 reference[0], reference[1], reference[2], reference[3], reference[4]
             )
             for reference in references
+        ]
+
+    
+    def get_reference_by_id(self, reference_id):
+        """
+        Function for searching reference data by id, from the database
+
+        Returns:
+            List that includes a Reference object
+        """
+
+        query = text("""
+                SELECT id, entry_type, title, authors, year FROM reference_entries WHERE reference_entries.id = (:reference_id)
+                """)
+        query_result = self.db.session.execute(query, {"reference_id":reference_id})
+        reference = query_result.fetchone()
+
+        return [
+            Reference(
+                reference[0], reference[1], reference[2], reference[3], reference[4]
+            )
         ]
 
     def create_reference(self, entry_type, title, authors, year):
@@ -26,6 +48,7 @@ class ReferenceRepository:
             INSERT INTO reference_entries (entry_type, title, authors, year) 
             VALUES (:entry_type, :title, :authors, :year)
         """
+
         )
 
         self.db.session.execute(
@@ -39,5 +62,20 @@ class ReferenceRepository:
         )
         self.db.session.commit()
 
+
+    def remove_reference(self, reference_id):
+        sql = text(
+            """
+            DELETE FROM reference_entries WHERE id = :id
+            """
+        )
+
+        self.db.session.execute(
+            sql,
+            {
+                "id": reference_id
+            }
+        )
+        self.db.session.commit()
 
 reference_repo = ReferenceRepository(db)
