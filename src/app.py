@@ -88,6 +88,16 @@ def update_reference(reference_id):
 
     return redirect("/")
 
+@app.route("/remove_reference/<reference_id>", methods=["POST"])
+def remove_reference(reference_id):
+    try:
+        reference_repo.remove_reference(reference_id)
+        flash("Viite poistettu onnistuneesti!")
+        return redirect("/")
+    except Exception as error:
+        flash(str(error))
+        return redirect("/")
+
 
 # testausta varten oleva reitti
 if test_env:
