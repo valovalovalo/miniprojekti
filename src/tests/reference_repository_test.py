@@ -44,3 +44,4 @@ class TestReferenceRepository(unittest.TestCase):
 
         self.mock_db.session.execute.assert_called_once()
         self.mock_db.session.commit.assert_called_once()
+

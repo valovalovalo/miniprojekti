@@ -54,8 +54,10 @@ def reset_db():
 
     """
 
+
     print(f"Clearing contents from table {TABLE_NAME}")
     sql = text(f"DELETE FROM {TABLE_NAME}")
+
     db.session.execute(sql)
     db.session.commit()
 

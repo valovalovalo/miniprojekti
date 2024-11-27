@@ -2,6 +2,7 @@
 
 ignore=tests, story_tests
 
+
 [MESSAGE CONTROL]
 
 disable=raw-checker-failed,

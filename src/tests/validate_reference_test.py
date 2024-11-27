@@ -1,51 +1,55 @@
 import unittest
 from util import validate_reference, UserInputError
 
-class TestReferenceValidation(unittest.TestCase):
-    """
-    Testiluokka, joka testaa validate_reference-funktion toimivuutta.
-    Tämä luokka sisältää testejä, jotka varmistavat, että 
-    syötteiden pituus on oikein ja virheet käsitellään odotetulla tavalla.
-    
-    """
-    def test_valid_length_does_not_raise_error(self):
-        """
-        Testaa, että validate_reference ei nosta virhettä, kun syöte on 
-        hyväksyttävän pituinen (5-100 merkkiä).
-        
-        """
+
+class TestValidateReference(unittest.TestCase):
+    def setUp(self):
+        self.valid_entry_type = "book"
+        self.valid_title = "A Valid Title"
+        self.valid_authors = "Author Name"
+        self.valid_year = 2023
+
+    def test_valid_reference_does_not_raise_error(self):
+        """Ensure valid inputs do not raise errors."""
         try:
-            validate_reference("Valid Title")
-            validate_reference("A" * 5)
-            validate_reference("A" * 100)
-        except UserInputError as e:
-            self.fail(f"validate_reference raised UserInputError unexpectedly: {e}")
+            validate_reference(
+                self.valid_entry_type,
+                self.valid_title,
+                self.valid_authors,
+                self.valid_year
+            )
+        except UserInputError as error:
+            self.fail(f"Unexpected error: {error}")
 
-    def test_too_short_raises_error(self):
-        
-        """
-        Testaa, että validate_reference nostaa UserInputError-virheen, 
-        jos syöte on liian lyhyt (alle 5 merkkiä).
-        
-        """
+    def test_empty_entry_type_raises_error(self):
+        """Ensure empty entry type raises the correct error."""
+        with self.assertRaises(UserInputError) as c:
+            validate_reference("", self.valid_title, self.valid_authors, self.valid_year)
+        self.assertEqual(str(c.exception), "Entry type cannot be empty.")
 
-        with self.assertRaises(UserInputError):
-            validate_reference("A")
-        
-        with self.assertRaises(UserInputError):
-            validate_reference("")
+    def test_empty_title_raises_error(self):
+        """Ensure empty title raises the correct error."""
+        with self.assertRaises(UserInputError) as c:
+            validate_reference(self.valid_entry_type, "", self.valid_authors, self.valid_year)
+        self.assertEqual(str(c.exception), "Title cannot be empty.")
 
-        with self.assertRaises(UserInputError):
-            validate_reference("1234")
+    def test_empty_authors_raises_error(self):
+        """Ensure empty authors field raises the correct error."""
+        with self.assertRaises(UserInputError) as c:
+            validate_reference(self.valid_entry_type, self.valid_title, "", self.valid_year)
+        self.assertEqual(str(c.exception), "Authors field cannot be empty.")
 
-    def test_too_long_raises_error(self):
+    def test_invalid_year_raises_error(self):
+        """Ensure invalid year formats raise the correct error."""
+        # Non-numeric year
+        with self.assertRaises(UserInputError) as c:
+            validate_reference(self.valid_entry_type, self.valid_title, self.valid_authors, "abc")
+        self.assertEqual(str(c.exception), "Year must be a positive number.")
 
-        with self.assertRaises(UserInputError):
-            validate_reference("A" * 101)
-
-        with self.assertRaises(UserInputError):
-            validate_reference("B" * 1000)
+        # Negative year
+        with self.assertRaises(UserInputError) as c:
+            validate_reference(self.valid_entry_type, self.valid_title, self.valid_authors, -2023)
+        self.assertEqual(str(c.exception), "Year must be a positive number.")
 
 if __name__ == "__main__":
     unittest.main()
-

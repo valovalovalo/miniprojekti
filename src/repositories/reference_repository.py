@@ -20,6 +20,7 @@ class ReferenceRepository:
             )
             for reference in references
         ]
+
     
     def get_reference_by_id(self, reference_id):
         """
@@ -47,6 +48,7 @@ class ReferenceRepository:
             INSERT INTO reference_entries (entry_type, title, authors, year) 
             VALUES (:entry_type, :title, :authors, :year)
         """
+
         )
 
         self.db.session.execute(
@@ -59,6 +61,7 @@ class ReferenceRepository:
             },
         )
         self.db.session.commit()
+
 
     def remove_reference(self, reference_id):
         sql = text(
@@ -74,6 +77,5 @@ class ReferenceRepository:
             }
         )
         self.db.session.commit()
-
 
 reference_repo = ReferenceRepository(db)

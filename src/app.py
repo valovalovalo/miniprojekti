@@ -52,8 +52,9 @@ def new():
     Returns:
         Response: Rendered HTML page for creating a new reference.
     """
-     
+
     return render_template("new_reference.html")
+
 
 @app.route("/create_reference", methods=["POST"])
 def reference_creation():
@@ -62,8 +63,8 @@ def reference_creation():
 
     ---
 
-    Retrieves reference data from the request form, validates it, and 
-    creates a new reference in the database. Redirects to the home page on 
+    Retrieves reference data from the request form, validates it, and
+    creates a new reference in the database. Redirects to the home page on
     success or back to the new reference page on failure.
 
     ---
@@ -72,7 +73,8 @@ def reference_creation():
         POST: Accepts data for the new reference from an HTML form.
 
     Returns:
-        Response: Redirect to the home page ("/") on success, or to 
+
+        Response: Redirect to the home page ("/") on success, or to
                   "/new_reference" with an error message on failure.
     """
 
@@ -82,7 +84,7 @@ def reference_creation():
     year = request.form.get("year")
 
     try:
-        # validate_reference(entry_type, title, authors, year)
+        validate_reference(entry_type, title, authors, year)
         reference_repo.create_reference(entry_type, title, authors, year)
         return redirect("/")
     except Exception as error:
@@ -128,4 +130,6 @@ if test_env:
             Response: JSON object with a success message.
         """
         reset_db()
+
         return jsonify({"message": "db reset"})
+
