@@ -11,9 +11,9 @@ class TestReference(unittest.TestCase):
         self.authors = "Vihavainen, Arto and Paksula, Matti and Luukkainen, Matti"
         self.year = 2011
 
-    def test_get_bibtext(self):
-        # Test get_bibtext() creates proper reference dict
-        expected_bibtext = {
+    def test_get_bibtex(self):
+        # Test get_bibtex() creates proper reference dict
+        expected_bibtex = {
             "type": "inproceedings",
             "cite": "vihavainen2011",
             "fields": {
@@ -24,7 +24,7 @@ class TestReference(unittest.TestCase):
         }
         
         reference = Reference(self.id, self.entry_type, self.title, self.authors, self.year)
-        assert reference.bibtext == expected_bibtext
+        assert reference.bibtex == expected_bibtex
 
     def test_str_representation(self):
         # Test __str__
