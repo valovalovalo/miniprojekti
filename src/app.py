@@ -25,6 +25,26 @@ def index():
     references = reference_repo.get_references()
     return render_template("index.html", references=references)
 
+@app.route("/bibtex")
+def bibtex():
+
+    """
+    Render the bibtex page.
+
+    ---
+
+    Fetches all references from the database using `get_references` and 
+    passes them to the "bibtex.html" template for rendering.
+
+    ---
+
+    Returns:
+        Response: Rendered HTML page with a list of references.
+    """
+
+    references = reference_repo.get_references()
+    return render_template("bibtex.html", references=references)
+
 
 @app.route("/reference/<reference_id>", methods=["POST", "GET"])
 def reference(reference_id):
@@ -34,7 +54,7 @@ def reference(reference_id):
 
     if request.method == "GET":
         reference = reference_repo.get_reference_by_id(reference_id)
-    
+
         return render_template("reference.html", reference=reference[0])
 
 @app.route("/new_reference")
@@ -132,4 +152,4 @@ if test_env:
         reset_db()
 
         return jsonify({"message": "db reset"})
-
+    

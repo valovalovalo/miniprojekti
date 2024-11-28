@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Bibtext copypaste
+{% endblock %}
+
+{% block body %}
+
+{% for ref in references %}
+@{{ ref.bibtex['type'] }}&#123;{{ ref.bibtex['cite'] }},<br>
+{% for title, value in ref.bibtex['fields'].items() %}
+    &nbsp&nbsp&nbsp&nbsp{{ title }} = &#123;{{ value }}&#125;,<br>
+{% endfor %}
+&#125;<br>
+{% endfor %}
+
+{% endblock %}
