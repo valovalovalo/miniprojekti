@@ -25,8 +25,8 @@ def index():
     references = reference_repo.get_references()
     return render_template("index.html", references=references)
 
-@app.route("/bibtext")
-def bibtext():
+@app.route("/bibtex")
+def bibtex():
 
     """
     Render the bibtex page.
@@ -43,7 +43,7 @@ def bibtext():
     """
 
     references = reference_repo.get_references()
-    return render_template("bibtext.html", references=references)
+    return render_template("bibtex.html", references=references)
 
 
 @app.route("/reference/<reference_id>", methods=["POST", "GET"])

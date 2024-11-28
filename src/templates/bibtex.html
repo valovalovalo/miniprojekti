@@ -7,8 +7,8 @@
 {% block body %}
 
 {% for ref in references %}
-@{{ ref.bibtext['type'] }}&#123;{{ ref.bibtext['cite'] }},<br>
-{% for title, value in ref.bibtext['fields'].items() %}
+@{{ ref.bibtex['type'] }}&#123;{{ ref.bibtex['cite'] }},<br>
+{% for title, value in ref.bibtex['fields'].items() %}
     &nbsp&nbsp&nbsp&nbsp{{ title }} = &#123;{{ value }}&#125;,<br>
 {% endfor %}
 &#125;<br>
