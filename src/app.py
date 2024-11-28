@@ -54,7 +54,7 @@ def reference(reference_id):
 
     if request.method == "GET":
         reference = reference_repo.get_reference_by_id(reference_id)
-    
+
         return render_template("reference.html", reference=reference[0])
 
 @app.route("/new_reference")
@@ -152,4 +152,4 @@ if test_env:
         reset_db()
 
         return jsonify({"message": "db reset"})
-
+    

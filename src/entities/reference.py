@@ -12,15 +12,15 @@ class Reference:
         cite = f"{first_author.lower()}{self.year}"
         
         fields = {
-            'title': self.title,
-            'author': self.authors,
-            'year': self.year
+            "title": self.title,
+            "author": self.authors,
+            "year": self.year
         }
 
         bibtext = {
-            'type': self.entry_type,
-            'cite': cite,
-            'fields': fields
+            "type": self.entry_type,
+            "cite": cite,
+            "fields": fields
         }
 
         return bibtext
