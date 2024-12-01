@@ -19,11 +19,11 @@
   <tbody>
     {% for ref in references %}
     <tr>
-      <td>{{ ref['title'] }}</td>
-      <td>{{ ref['authors'] }}</td>
-      <td>{{ ref['year'] }}</td>
+      <td>{{ ref['data']['title'] }}</td>
+      <td>{{ ref['data']['authors'] }}</td>
+      <td>{{ ref['data']['year'] }}</td>
       <td>
-        <a href="/reference/{{ ref['id'] }}">View reference</a>
+        <a href="/reference/{{ ref['data']['id'] }}">View reference</a>
       </td>
     </tr>
     {% endfor %}

@@ -9,19 +9,11 @@ class ReferenceRepository:
         self.db = database
 
     def get_references(self):
-        result = self.db.session.execute(
-            text("SELECT id, entry_type, title, authors, year FROM reference_entries")
-        )
-        references = result.fetchall()
+        result = self.db.session.execute(text("SELECT * FROM reference_entries"))
+        references = result.mappings()
 
-        return [
-            Reference(
-                reference[0], reference[1], reference[2], reference[3], reference[4]
-            )
-            for reference in references
-        ]
+        return [Reference(reference) for reference in references]
 
-    
     def get_reference_by_id(self, reference_id):
         """
         Function for searching reference data by id, from the database
@@ -30,17 +22,15 @@ class ReferenceRepository:
             List that includes a Reference object
         """
 
-        query = text("""
-                SELECT id, entry_type, title, authors, year FROM reference_entries WHERE reference_entries.id = (:reference_id)
-                """)
-        query_result = self.db.session.execute(query, {"reference_id":reference_id})
-        reference = query_result.fetchone()
+        query = text(
+            """
+                SELECT * FROM reference_entries WHERE reference_entries.id = (:reference_id)
+                """
+        )
+        query_result = self.db.session.execute(query, {"reference_id": reference_id})
+        reference = query_result.mappings().first()
 
-        return [
-            Reference(
-                reference[0], reference[1], reference[2], reference[3], reference[4]
-            )
-        ]
+        return [Reference(reference)]
 
     def create_reference(self, entry_type, title, authors, year):
         sql = text(
@@ -48,7 +38,6 @@ class ReferenceRepository:
             INSERT INTO reference_entries (entry_type, title, authors, year) 
             VALUES (:entry_type, :title, :authors, :year)
         """
-
         )
 
         self.db.session.execute(
@@ -62,7 +51,6 @@ class ReferenceRepository:
         )
         self.db.session.commit()
 
-
     def remove_reference(self, reference_id):
         sql = text(
             """
@@ -70,12 +58,8 @@ class ReferenceRepository:
             """
         )
 
-        self.db.session.execute(
-            sql,
-            {
-                "id": reference_id
-            }
-        )
+        self.db.session.execute(sql, {"id": reference_id})
         self.db.session.commit()
+
 
 reference_repo = ReferenceRepository(db)

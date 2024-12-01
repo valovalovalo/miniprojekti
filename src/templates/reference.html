@@ -13,10 +13,10 @@
 <ul>
   {% if reference %}
     <li style="margin-bottom: 15px;">
-      <strong>Type:</strong> {{ reference['entry_type'] }}<br>
-      <strong>Title:</strong> {{ reference['title'] }}<br>
-      <strong>Authors:</strong> {{ reference['authors'] }}<br>
-      <strong>Year:</strong> {{ reference['year'] }}
+      <strong>Type:</strong> {{ reference['data']['entry_type'] }}<br>
+      <strong>Title:</strong> {{ reference['data']['title'] }}<br>
+      <strong>Authors:</strong> {{ reference['data']['authors'] }}<br>
+      <strong>Year:</strong> {{ reference['data']['year'] }}
     </li>
 
     <form action="/remove_reference/{{ reference['id'] }}" method="POST" style="margin-top: 20px;">
