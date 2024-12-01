@@ -19,7 +19,7 @@
       <strong>Year:</strong> {{ reference['data']['year'] }}
     </li>
 
-    <form action="/remove_reference/{{ reference['id'] }}" method="POST" style="margin-top: 20px;">
+    <form action="/remove_reference/{{ reference['data']['id'] }}" method="POST" style="margin-top: 20px;">
       <button type="submit" style="background-color: rgb(250, 249, 249); color: rgb(8, 8, 8); border: 2px solid black; padding: 10px; cursor: pointer;">
         Delete this reference
       </button>
