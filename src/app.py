@@ -25,15 +25,34 @@ def index():
     references = reference_repo.get_references()
     return render_template("index.html", references=references)
 
+
+@app.route("/input-form/<reference_type>", methods=["GET"])
+def get_form_fields(reference_type):
+    factory = reference_repo.factories.get(reference_type)
+    if not factory:
+        return jsonify({"error": "Invalid reference type"}), 400
+
+    form = factory.create_form()
+    fields = [
+        {
+            "name": field.name,
+            "label": field.label.text,
+            "required": bool(field.validators),
+        }
+        for field in form
+    ]
+
+    return jsonify(fields)
+
+
 @app.route("/bibtex")
 def bibtex():
-
     """
     Render the bibtex page.
 
     ---
 
-    Fetches all references from the database using `get_references` and 
+    Fetches all references from the database using `get_references` and
     passes them to the "bibtex.html" template for rendering.
 
     ---
@@ -56,6 +75,7 @@ def reference(reference_id):
         reference = reference_repo.get_reference_by_id(reference_id)
 
         return render_template("reference.html", reference=reference[0])
+
 
 @app.route("/new_reference")
 def new():
@@ -120,6 +140,7 @@ def update_reference(reference_id):
 
     return redirect("/")
 
+
 @app.route("/remove_reference/<reference_id>", methods=["POST"])
 def remove_reference(reference_id):
     try:
@@ -152,4 +173,3 @@ if test_env:
         reset_db()
 
         return jsonify({"message": "db reset"})
-    

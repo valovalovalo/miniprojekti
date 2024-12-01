@@ -2,11 +2,15 @@ from sqlalchemy import text
 
 from config import db
 from entities.reference import Reference
+from entities.factories import BookFormFactory, ArticleFormFactory, InproceedingsFormFactory
 
 
 class ReferenceRepository:
     def __init__(self, database):
         self.db = database
+        self.factories = {"book": BookFormFactory(),
+                          "article": ArticleFormFactory(),
+                          "inproceedings": InproceedingsFormFactory()}
 
     def get_references(self):
         result = self.db.session.execute(text("SELECT * FROM reference_entries"))
