@@ -12,6 +12,7 @@ At start there are no references
 After adding a reference, site displays it
     Go To  ${HOME_URL}
     Click Link  Create a new reference
+    Select From List By Value  id=entry_type  book
     Input Text  title  Taru sormusten herrasta
     Input Text  authors  Lassi
     Input Text  year  2000
@@ -21,6 +22,7 @@ After adding a reference, site displays it
 Test If Single Page View Works
     Go To  ${HOME_URL}
     Click Link  Create a new reference
+    Select From List By Value  id=entry_type  book
     Input Text  title  Taru sormusten herrasta
     Input Text  authors  Lassi
     Input Text  year  2000
@@ -33,6 +35,7 @@ Test If Single Page View Works
 Test If Back To Home Page Button Works
     Go To  ${HOME_URL}
     Click Link  Create a new reference
+    Select From List By Value  id=entry_type  book
     Input Text  title  Taru sormusten herrasta
     Input Text  authors  Lassi
     Input Text  year  2000
