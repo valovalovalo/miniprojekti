@@ -12,6 +12,7 @@ At Start There Are No References
 After Adding A Reference, Site Displays It
     Go To  ${HOME_URL}
     Click Link  Create a new reference
+    Select From List By Value  id=entry_type  book
     Input Text  title  test1
     Input Text  authors  test
     Input Text  year  2000
@@ -21,17 +22,20 @@ After Adding A Reference, Site Displays It
 Test For Empty Input Fields
     Go To  ${HOME_URL}
     Click Link  Create a new reference
+    Select From List By Value  id=entry_type  book
     Click Button  Create Reference
     Location Should Be  ${NEW_REFERENCE_URL}
 
 Test For Invalid Input Year
     Go To  ${HOME_URL}
     Click Link  Create a new reference
+    Select From List By Value  id=entry_type  book
     Input Text  title  test2
     Input Text  authors  test
-    Input Text  year  1800
+    Input Text  year  -1800
     Click Button  Create Reference
     Location Should Be  ${NEW_REFERENCE_URL}
+    Select From List By Value  id=entry_type  book
     Input Text  year  2025
     Location Should Be  ${NEW_REFERENCE_URL}
 

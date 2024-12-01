@@ -65,16 +65,15 @@ def bibtex():
     return render_template("bibtex.html", references=references)
 
 
-@app.route("/reference/<reference_id>", methods=["POST", "GET"])
-def reference(reference_id):
+@app.route("/reference/<reference_id>", methods=["GET"])
+def get_reference(reference_id):
     """
     Render the page for viewing single references
     """
 
-    if request.method == "GET":
-        reference = reference_repo.get_reference_by_id(reference_id)
+    reference = reference_repo.get_reference_by_id(reference_id)
 
-        return render_template("reference.html", reference=reference[0])
+    return render_template("reference.html", reference=reference[0])
 
 
 @app.route("/new_reference")
@@ -130,15 +129,6 @@ def reference_creation():
     except Exception as error:
         flash(str(error))
         return redirect("/new_reference")
-
-
-@app.route("/update_reference/<reference_id>", methods=["POST"])
-def update_reference(reference_id):
-    """
-    Not implemented yet.
-    """
-
-    return redirect("/")
 
 
 @app.route("/remove_reference/<reference_id>", methods=["POST"])
