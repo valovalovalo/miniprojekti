@@ -5,7 +5,7 @@ class Reference:
 
     def get_bibtex(self):
         first_author = self.data["authors"].split(",")[0].strip().split()[-1]
-        cite = f"{first_author.lower()}{self.data["year"]}"
+        cite = f'{first_author.lower()}{self.data["year"]}'
 
         fields = {
             "title": self.data["title"],
