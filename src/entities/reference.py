@@ -4,17 +4,17 @@ class Reference:
         self.bibtex = self.get_bibtex()
 
     def get_bibtex(self):
-        first_author = self.data.authors.split(",")[0].strip().split()[-1]
-        cite = f"{first_author.lower()}{self.data.year}"
+        first_author = self.data["authors"].split(",")[0].strip().split()[-1]
+        cite = f"{first_author.lower()}{self.data["year"]}"
 
         fields = {
-            "title": self.data.title,
-            "author": self.data.authors,
-            "year": self.data.year
+            "title": self.data["title"],
+            "author": self.data["authors"],
+            "year": self.data["year"]
         }
 
         bibtex = {
-            "type": self.data.entry_type,
+            "type": self.data["entry_type"],
             "cite": cite,
             "fields": fields
         }

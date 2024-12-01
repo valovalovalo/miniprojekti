@@ -10,7 +10,7 @@ class ReferenceRepository:
 
     def get_references(self):
         result = self.db.session.execute(text("SELECT * FROM reference_entries"))
-        references = result.mappings()
+        references = result.mappings().all()
 
         return [Reference(reference) for reference in references]
 
