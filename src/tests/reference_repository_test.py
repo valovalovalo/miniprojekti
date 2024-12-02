@@ -13,9 +13,21 @@ class TestReferenceRepository(unittest.TestCase):
 
     def test_haku_toimii(self):
         mock_result = Mock()
-        mock_result.fetchall.return_value = [
-            [1, "book", "Taru Sormusten Herrasta", "J.R.R Tolkien", "1954"],
-            [2, "book", "Hobitti eli sinne ja takaisin", "J.R.R Tolkien", "1937"],
+        mock_result.mappings.return_value.all.return_value = [
+            {
+                "id": 1,
+                "entry_type": "book",
+                "title": "Taru Sormusten Herrasta",
+                "authors": "J.R.R Tolkien",
+                "year": "1954",
+            },
+            {
+                "id": 2,
+                "entry_type": "book",
+                "title": "Hobitti eli sinne ja takaisin",
+                "authors": "J.R.R Tolkien",
+                "year": "1937",
+            },
         ]
         self.mock_db.session.execute.return_value = mock_result
         references = self.repo.get_references()
@@ -24,8 +36,8 @@ class TestReferenceRepository(unittest.TestCase):
 
         self.assertEqual(len(references), 2)
         self.assertIsInstance(references[0], Reference)
-        self.assertEqual(references[0].title, "Taru Sormusten Herrasta")
-        self.assertEqual(references[1].authors, "J.R.R Tolkien")
+        self.assertEqual(references[0].data["title"], "Taru Sormusten Herrasta")
+        self.assertEqual(references[1].data["authors"], "J.R.R Tolkien")
 
     def test_viitteen_luominen_onnistuu(self):
         entry_type = "book"
@@ -38,10 +50,8 @@ class TestReferenceRepository(unittest.TestCase):
         self.mock_db.session.execute.assert_called_once()
         self.mock_db.session.commit.assert_called_once()
 
-
     def test_viitteen_poisto_onnistuu(self):
         self.repo.remove_reference(1)
 
         self.mock_db.session.execute.assert_called_once()
         self.mock_db.session.commit.assert_called_once()
-
