@@ -100,6 +100,15 @@ def setup_db():
         title TEXT NOT NULL,
         authors TEXT NOT NULL,
         year INTEGER NOT NULL,
+        publisher TEXT,
+        isbn TEXT,
+        editor TEXT,
+        month TEXT,
+        journal TEXT,
+        volume INTEGER,
+        number INTEGER,
+        pages INTEGET,
+        booktitle TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
 """)
