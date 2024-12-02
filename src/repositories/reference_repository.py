@@ -38,47 +38,17 @@ class ReferenceRepository:
 
     def create_reference(self, form_data):
 
-        test_data = {
-            "entry_type": "article",
-            "title": "abcdefg",
-            "authors": "hijklmn",
-            "year": "2000"
-        }
-        
-        columns = ", ".join(test_data.keys())
-        placeholders = ", ".join(f":{key}" for key in test_data.keys())
+        columns = list(form_data.keys())
+        placeholders = [f":{col}" for col in columns]
 
-        query = text(f"""
-            INSERT INTO reference_entries ({columns})
-            VALUES ({placeholders})
+        sql = text(f"""
+            INSERT INTO reference_entries
+            ({', '.join(columns)})
+            VALUES ({', '.join(placeholders)})
         """)
 
-        parameters = {key: (value if value != "" else None) for key, value in test_data.items()}
-
-        self.db.session.execute(query, parameters)
+        self.db.session.execute(sql, form_data)
         self.db.session.commit()
-
-
-
-
-
-  #      sql = text(
-  #          """
-  #          INSERT INTO reference_entries (entry_type, title, authors, year) 
-   #         VALUES (:entry_type, :title, :authors, :year)
-   #     """
-    #    )
-#
- #       self.db.session.execute(
-  #          sql,
-   #         {
-    #            "entry_type": entry_type,
-     #           "title": title,
-      #          "authors": authors,
-       #         "year": year,
-       #     },
-       # )
-       # self.db.session.commit()
 
     def remove_reference(self, reference_id):
         sql = text(
