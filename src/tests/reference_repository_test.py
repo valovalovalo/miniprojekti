@@ -40,12 +40,14 @@ class TestReferenceRepository(unittest.TestCase):
         self.assertEqual(references[1].data["authors"], "J.R.R Tolkien")
 
     def test_viitteen_luominen_onnistuu(self):
-        entry_type = "book"
-        title = "Vuonna 1984"
-        authors = "George Orwell"
-        year = 1949
 
-        self.repo.create_reference(entry_type, title, authors, year)
+        test_input = {
+            "entry_type": "book",
+            "title": "Vuonna 1984",
+            "authors": "George Orwell",
+            "year": "1949"
+            }
+        self.repo.create_reference(test_input)
 
         self.mock_db.session.execute.assert_called_once()
         self.mock_db.session.commit.assert_called_once()

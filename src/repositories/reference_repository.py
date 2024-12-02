@@ -29,30 +29,25 @@ class ReferenceRepository:
         query = text(
             """
                 SELECT * FROM reference_entries WHERE reference_entries.id = (:reference_id)
-                """
+            """
         )
         query_result = self.db.session.execute(query, {"reference_id": reference_id})
         reference = query_result.mappings().first()
 
         return [Reference(reference)]
 
-    def create_reference(self, entry_type, title, authors, year):
-        sql = text(
-            """
-            INSERT INTO reference_entries (entry_type, title, authors, year) 
-            VALUES (:entry_type, :title, :authors, :year)
-        """
-        )
+    def create_reference(self, form_data):
 
-        self.db.session.execute(
-            sql,
-            {
-                "entry_type": entry_type,
-                "title": title,
-                "authors": authors,
-                "year": year,
-            },
-        )
+        columns = list(form_data.keys())
+        placeholders = [f":{col}" for col in columns]
+
+        sql = text(f"""
+            INSERT INTO reference_entries
+            ({', '.join(columns)})
+            VALUES ({', '.join(placeholders)})
+        """)
+
+        self.db.session.execute(sql, form_data)
         self.db.session.commit()
 
     def remove_reference(self, reference_id):
