@@ -107,7 +107,7 @@ def setup_db():
         journal TEXT,
         volume INTEGER,
         number INTEGER,
-        pages INTEGET,
+        pages INTEGER,
         booktitle TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
