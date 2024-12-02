@@ -117,14 +117,18 @@ def reference_creation():
                   "/new_reference" with an error message on failure.
     """
 
-    entry_type = request.form.get("entry_type")
-    title = request.form.get("title")
-    authors = request.form.get("authors")
-    year = request.form.get("year")
+    #entry_type = request.form.get("entry_type")
+    #title = request.form.get("title")
+    #authors = request.form.get("authors")
+    #year = request.form.get("year")
+
+    # Gets form data in a dict, passes it to create_reference function
+    form_data = request.form.to_dict()
+    print(form_data)
 
     try:
-        validate_reference(entry_type, title, authors, year)
-        reference_repo.create_reference(entry_type, title, authors, year)
+        # validate_reference(entry_type, title, authors, year)
+        reference_repo.create_reference(form_data)
         return redirect("/")
     except Exception as error:
         flash(str(error))
