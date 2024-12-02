@@ -97,34 +97,9 @@ def new():
 
 @app.route("/create_reference", methods=["POST"])
 def reference_creation():
-    """
-    Handle the creation of a new reference.
-
-    ---
-
-    Retrieves reference data from the request form, validates it, and
-    creates a new reference in the database. Redirects to the home page on
-    success or back to the new reference page on failure.
-
-    ---
-
-    Methods:
-        POST: Accepts data for the new reference from an HTML form.
-
-    Returns:
-
-        Response: Redirect to the home page ("/") on success, or to
-                  "/new_reference" with an error message on failure.
-    """
-
-    #entry_type = request.form.get("entry_type")
-    #title = request.form.get("title")
-    #authors = request.form.get("authors")
-    #year = request.form.get("year")
 
     # Gets form data in a dict, passes it to create_reference function
-    form_data = request.form.to_dict()
-    print(form_data)
+    form_data = dict(request.form)
 
     try:
         # validate_reference(entry_type, title, authors, year)
