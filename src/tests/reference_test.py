@@ -21,7 +21,7 @@ class TestReference(unittest.TestCase):
             "cite": "vihavainen2011",
             "fields": {
                 "title": "Extreme Apprenticeship Method in Teaching Programming for Beginners.",
-                "author": "Vihavainen, Arto and Paksula, Matti and Luukkainen, Matti",
+                "authors": "Vihavainen, Arto and Paksula, Matti and Luukkainen, Matti",
                 "year": 2011,
             },
         }
