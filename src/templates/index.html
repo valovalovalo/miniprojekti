@@ -11,9 +11,43 @@
 <table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%;">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Authors</th>
-      <th>Year</th>
+      <th>
+        <a href="/?sort=title&order={{ 'desc' if sort == 'title' and order == 'asc' else 'asc' }}" style="color: black; text-decoration: none;">
+          Title
+          {% if sort == 'title' %}
+            {% if order == 'asc' %}
+              ▲
+            {% else %}
+              ▼
+            {% endif %}
+          {% endif %}
+        </a>
+      </th>
+      <th>
+        <a href="/?sort=authors&order={{ 'desc' if sort == 'authors' and order == 'asc' else 'asc' }}" style="color: black; text-decoration: none;">
+          Authors
+          {% if sort == 'authors' %}
+            {% if order == 'asc' %}
+              ▲
+            {% else %}
+              ▼
+            {% endif %}
+          {% endif %}
+        </a>
+      </th>
+      <th>
+        <a href="/?sort=year&order={{ 'desc' if sort == 'year' and order == 'asc' else 'asc' }}" style="color: black; text-decoration: none;">
+          Year
+          {% if sort == 'year' %}
+            {% if order == 'asc' %}
+              ▲
+            {% else %}
+              ▼
+            {% endif %}
+          {% endif %}
+        </a>
+      </th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>

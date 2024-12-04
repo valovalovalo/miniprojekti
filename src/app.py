@@ -1,9 +1,14 @@
+"""
+This module contains routes and logic for managing references in the app.
+It handles the display, creation, and deletion of references in the system.
+
+"""
+
 from flask import flash, jsonify, redirect, render_template, request
 
 from config import app, test_env
 from db_helper import reset_db
 from repositories.reference_repository import reference_repo
-from util import validate_reference
 
 
 @app.route("/")
@@ -22,8 +27,12 @@ def index():
         Response: Rendered HTML page with a list of references.
     """
 
-    references = reference_repo.get_references()
-    return render_template("index.html", references=references)
+
+    sort_by = request.args.get("sort", "title")  # Oletuksena "title"
+    order = request.args.get("order", "asc")  # Oletuksena "asc"
+    references = reference_repo.get_references(sort_by=sort_by, order=order)
+    
+    return render_template("index.html", references=references, sort=sort_by, order=order)
 
 
 @app.route("/input-form/<reference_type>", methods=["GET"])
@@ -98,11 +107,13 @@ def new():
 @app.route("/create_reference", methods=["POST"])
 def reference_creation():
 
-    # Gets form data in a dict, passes it to create_reference function
+    """
+    Gets form data in a dict, passes it to create_reference function
+    
+    """
     form_data = dict(request.form)
 
     try:
-        # validate_reference(entry_type, title, authors, year)
         reference_repo.create_reference(form_data)
         return redirect("/")
     except Exception as error:
