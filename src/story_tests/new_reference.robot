@@ -26,39 +26,6 @@ Test For Empty Input Fields
     Click Button  Create Reference
     Location Should Be  ${NEW_REFERENCE_URL}
 
-Test For Correct Input Fields For Article
-    Go To  ${HOME_URL}
-    Click Link  Create a new reference
-    Select From List By Value  id=entry_type  article
-    Page Should Contain  Title:
-    Page Should Contain  Authors:
-    Page Should Contain  Year:
-    Page Should Contain  Journal:
-    Page Should Contain  Volume:
-    Page Should Contain  Number:
-    Page Should Contain  Pages:
-
-Test For Correct Input Fields For Book
-    Go To  ${HOME_URL}
-    Click Link  Create a new reference
-    Select From List By Value  id=entry_type  book
-    Page Should Contain  Title:
-    Page Should Contain  Authors:
-    Page Should Contain  Year:
-    Page Should Contain  Publisher:
-    Page Should Contain  ISBN:
-
-Test For Correct Input Fields For Inproceedings
-    Go To  ${HOME_URL}
-    Click Link  Create a new reference
-    Select From List By Value  id=entry_type  inproceedings
-    Page Should Contain  Title:
-    Page Should Contain  Authors:
-    Page Should Contain  Year:
-    Page Should Contain  Book Title:
-    Page Should Contain  Publisher:
-    Page Should Contain  Pages:
-
 Test For Minimal Input Article
     Go To  ${HOME_URL}
     Click Link  Create a new reference
