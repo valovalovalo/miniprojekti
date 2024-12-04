@@ -17,6 +17,7 @@ class Reference:
             if value:
                 fields[field] = value
 
+
         bibtex = {
             "type": self.data["entry_type"],
             "cite": cite,
