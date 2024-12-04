@@ -26,6 +26,110 @@ Test For Empty Input Fields
     Click Button  Create Reference
     Location Should Be  ${NEW_REFERENCE_URL}
 
+Test For Correct Input Fields For Article
+    Go To  ${HOME_URL}
+    Click Link  Create a new reference
+    Select From List By Value  id=entry_type  article
+    Page Should Contain  Title:
+    Page Should Contain  Authors:
+    Page Should Contain  Year:
+    Page Should Contain  Journal:
+    Page Should Contain  Volume:
+    Page Should Contain  Number:
+    Page Should Contain  Pages:
+
+Test For Correct Input Fields For Book
+    Go To  ${HOME_URL}
+    Click Link  Create a new reference
+    Select From List By Value  id=entry_type  book
+    Page Should Contain  Title:
+    Page Should Contain  Authors:
+    Page Should Contain  Year:
+    Page Should Contain  Publisher:
+    Page Should Contain  ISBN:
+
+Test For Correct Input Fields For Inproceedings
+    Go To  ${HOME_URL}
+    Click Link  Create a new reference
+    Select From List By Value  id=entry_type  inproceedings
+    Page Should Contain  Title:
+    Page Should Contain  Authors:
+    Page Should Contain  Year:
+    Page Should Contain  Book Title:
+    Page Should Contain  Publisher:
+    Page Should Contain  Pages:
+
+Test For Minimal Input Article
+    Go To  ${HOME_URL}
+    Click Link  Create a new reference
+    Select From List By Value  id=entry_type  article
+    Input Text  title  articletest
+    Input Text  authors  article authors
+    Input Text  year  2000
+    Input Text  journal  article journal
+    Click Button  Create Reference
+    Page Should Contain  articletest
+
+Test For Full Input Article
+    Go To  ${HOME_URL}
+    Click Link  Create a new reference
+    Select From List By Value  id=entry_type  article
+    Input Text  title  articletest
+    Input Text  authors  article authors
+    Input Text  year  2000
+    Input Text  journal  article journal
+    Input Text  volume  article volume
+    Input Text  number  1
+    Input Text  pages  2
+    Click Button  Create Reference
+    Page Should Contain  articletest
+
+Test For Minimal Input Book
+    Go To  ${HOME_URL}
+    Click Link  Create a new reference
+    Select From List By Value  id=entry_type  book
+    Input Text  title  booktest
+    Input Text  authors  book authors
+    Input Text  publisher  book publisher
+    Input Text  year  2000
+    Click Button  Create Reference
+    Page Should Contain  booktest
+
+Test For Full Input Book
+    Go To  ${HOME_URL}
+    Click Link  Create a new reference
+    Select From List By Value  id=entry_type  book
+    Input Text  title  booktest
+    Input Text  authors  book authors
+    Input Text  publisher  book publisher
+    Input Text  year  2000
+    Input Text  isbn  1234
+    Click Button  Create Reference
+    Page Should Contain  booktest
+
+Test For Minimal Input Inproceeding
+    Go To  ${HOME_URL}
+    Click Link  Create a new reference
+    Select From List By Value  id=entry_type  inproceedings
+    Input Text  title  inproceedingstest
+    Input Text  authors  inproceedings authors
+    Input Text  year  2000
+    Click Button  Create Reference
+    Page Should Contain  inproceedingstest
+
+Test For Full Input Inproceeding
+    Go To  ${HOME_URL}
+    Click Link  Create a new reference
+    Select From List By Value  id=entry_type  inproceedings
+    Input Text  title  inproceedingstest
+    Input Text  booktitle  inproceedingsbooktitle
+    Input Text  authors  inproceedings authors
+    Input Text  year  2000
+    Input Text  pages  2
+    Input Text  publisher  inproceedingspublisher
+    Click Button  Create Reference
+    Page Should Contain  inproceedingstest
+
 #Test For Invalid Input Year
 #    Go To  ${HOME_URL}
 #    Click Link  Create a new reference
