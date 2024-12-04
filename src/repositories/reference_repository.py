@@ -12,8 +12,29 @@ class ReferenceRepository:
                           "article": ArticleFormFactory(),
                           "inproceedings": InproceedingsFormFactory()}
 
-    def get_references(self):
-        result = self.db.session.execute(text("SELECT * FROM reference_entries"))
+    def get_references(self, sort_by="title", order="asc"):
+        """
+        Fetch references from the database with sorting.
+
+        Args:
+            sort_by (str): Column to sort by (e.g., 'title', 'authors', 'year').
+            order (str): Sort order ('asc' for ascending, 'desc' for descending).
+
+        Returns:
+            List[Reference]: List of Reference objects.
+        """
+        if sort_by not in {"title", "authors", "year"}:
+            sort_by = "title"
+
+        if order not in {"asc", "desc"}:
+            order = "asc"
+
+        sql = text(f"""
+            SELECT * FROM reference_entries
+            ORDER BY {sort_by} {order}
+        """)
+
+        result = self.db.session.execute(sql)
         references = result.mappings().all()
 
         return [Reference(reference) for reference in references]
@@ -37,6 +58,11 @@ class ReferenceRepository:
         return [Reference(reference)]
 
     def create_reference(self, form_data):
+        
+        """
+        Function for creating a reference
+
+        """
 
         columns = list(form_data.keys())
         placeholders = [f":{col}" for col in columns]
@@ -51,6 +77,11 @@ class ReferenceRepository:
         self.db.session.commit()
 
     def remove_reference(self, reference_id):
+        
+        """
+        Function for removing a reference from the database
+
+        """
         sql = text(
             """
             DELETE FROM reference_entries WHERE id = :id
