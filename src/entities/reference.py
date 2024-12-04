@@ -7,11 +7,16 @@ class Reference:
         first_author = self.data["authors"].split(",")[0].strip().split()[-1]
         cite = f'{first_author.lower()}{self.data["year"]}'
 
-        fields = {
-            "title": self.data["title"],
-            "author": self.data["authors"],
-            "year": self.data["year"]
-        }
+        data_fields = ["title", "authors", "year", "publisher", "isbn", "editor", "month", "journal", 
+                           "volume", "number", "pages", "booktitle"]
+        
+        fields = {}
+        
+        for field in data_fields:
+            value = self.data.get(field)
+            if value:
+                fields[field] = value
+
 
         bibtex = {
             "type": self.data["entry_type"],
