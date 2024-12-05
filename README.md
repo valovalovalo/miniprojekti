@@ -32,3 +32,6 @@ python src/index.py
 ```
 
 Sovellus löytyy osoitteesta localhost:5001
+
+## Lisenssi
+Tämä projekti on lisensoitu CC BY NC
