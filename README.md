@@ -6,6 +6,7 @@ Lue [täältä](https://ohjelmistotuotanto-hy.github.io/flask/) lisää.
 
 [Backlog](https://github.com/orgs/valovalovalo/projects/1)
 [Definition of Done](https://github.com/valovalovalo/miniprojekti/wiki/Definition-Of-Done)
+[Coverageraportti](https://maza.kapsi.fi/miniprojekticoverage/)
 
 ## Asentaminen
 
@@ -31,3 +32,6 @@ python src/index.py
 ```
 
 Sovellus löytyy osoitteesta localhost:5001
+
+## Lisenssi
+Tämä projekti on lisensoitu CC BY NC
