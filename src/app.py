@@ -16,20 +16,15 @@ def index():
     """
     Render the index page.
 
-    ---
-
     Fetches all references from the database using `get_references` and
     passes them to the "index.html" template for rendering.
-
-    ---
 
     Returns:
         Response: Rendered HTML page with a list of references.
     """
 
-
-    sort_by = request.args.get("sort", "title")  # Oletuksena "title"
-    order = request.args.get("order", "asc")  # Oletuksena "asc"
+    sort_by = request.args.get("sort", "title")  # default "title"
+    order = request.args.get("order", "asc")  # default "asc"
     references = reference_repo.get_references(sort_by=sort_by, order=order)
     
     return render_template("index.html", references=references, sort=sort_by, order=order)
@@ -37,6 +32,10 @@ def index():
 
 @app.route("/input-form/<reference_type>", methods=["GET"])
 def get_form_fields(reference_type):
+    """
+    Function for creating all input fields dynamically with factories
+    """
+
     factory = reference_repo.factories.get(reference_type)
     if not factory:
         return jsonify({"error": "Invalid reference type"}), 400
@@ -59,12 +58,8 @@ def bibtex():
     """
     Render the bibtex page.
 
-    ---
-
     Fetches all references from the database using `get_references` and
     passes them to the "bibtex.html" template for rendering.
-
-    ---
 
     Returns:
         Response: Rendered HTML page with a list of references.
@@ -90,12 +85,8 @@ def new():
     """
     Render the page for creating a new reference.
 
-    ---
-
     Renders the "new_reference.html" template where users can input details
     for creating a new reference.
-
-    ---
 
     Returns:
         Response: Rendered HTML page for creating a new reference.
@@ -106,11 +97,11 @@ def new():
 
 @app.route("/create_reference", methods=["POST"])
 def reference_creation():
-
     """
     Gets form data in a dict, passes it to create_reference function
     
     """
+
     form_data = dict(request.form)
 
     try:
@@ -123,16 +114,29 @@ def reference_creation():
 
 @app.route("/remove_reference/<reference_id>", methods=["POST"])
 def remove_reference(reference_id):
+    """
+    Function for removing a reference, redirect to home page
+    """
+    
     try:
         reference_repo.remove_reference(reference_id)
-        flash("Viite poistettu onnistuneesti!")
+        flash("Reference succesfully deleted")
         return redirect("/")
     except Exception as error:
         flash(str(error))
         return redirect("/")
+    
+
+@app.route("/update_reference/<reference_id>", methods=["POST"])
+def update(reference_id):
+    """
+    TBD, function for updating reference data
+    """
+
+    return render_template("/update_reference.html")
 
 
-# testausta varten oleva reitti
+# Route for testing
 if test_env:
 
     @app.route("/reset_db")
@@ -140,16 +144,13 @@ if test_env:
         """
         Reset the database (for testing purposes only).
 
-        ---
-
         Clears the database by calling `reset_db` and returns a success
         message in JSON format. Only available in testing environments.
-
-        ---
 
         Returns:
             Response: JSON object with a success message.
         """
+
         reset_db()
 
         return jsonify({"message": "db reset"})

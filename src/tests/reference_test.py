@@ -28,19 +28,3 @@ class TestReference(unittest.TestCase):
 
         reference = Reference(self.data)
         assert reference.get_bibtex() == expected_bibtex
-
-    # def test_str_representation(self):
-    #     # Test __str__
-    #     expected_str = (
-    #         "@inproceedings{vihavainen2011,\n"
-    #         "  title = {Extreme Apprenticeship Method in Teaching Programming for Beginners.},\n"
-    #         "  author = {Vihavainen, Arto and Paksula, Matti and Luukkainen, Matti},\n"
-    #         "  year = {2011}\n"
-    #         "}"
-    #     )
-
-    #     # Act
-    #     reference = Reference(self.data)
-
-    #     # Assert
-    #     assert str(reference) == expected_str
