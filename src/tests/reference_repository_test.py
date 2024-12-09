@@ -11,7 +11,7 @@ class TestReferenceRepository(unittest.TestCase):
         self.mock_db.session = Mock()
         self.repo = ReferenceRepository(self.mock_db)
 
-    def test_haku_toimii(self):
+    def test_search_works(self):
         mock_result = Mock()
         mock_result.mappings.return_value.all.return_value = [
             {
@@ -39,7 +39,7 @@ class TestReferenceRepository(unittest.TestCase):
         self.assertEqual(references[0].data["title"], "Taru Sormusten Herrasta")
         self.assertEqual(references[1].data["authors"], "J.R.R Tolkien")
 
-    def test_viitteen_luominen_onnistuu(self):
+    def test_reference_creation_works(self):
 
         test_input = {
             "entry_type": "book",
@@ -52,7 +52,7 @@ class TestReferenceRepository(unittest.TestCase):
         self.mock_db.session.execute.assert_called_once()
         self.mock_db.session.commit.assert_called_once()
 
-    def test_viitteen_poisto_onnistuu(self):
+    def test_reference_delete_works(self):
         self.repo.remove_reference(1)
 
         self.mock_db.session.execute.assert_called_once()

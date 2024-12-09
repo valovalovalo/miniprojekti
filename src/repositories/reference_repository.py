@@ -12,6 +12,7 @@ class ReferenceRepository:
                           "article": ArticleFormFactory(),
                           "inproceedings": InproceedingsFormFactory()}
 
+
     def get_references(self, sort_by="title", order="asc"):
         """
         Fetch references from the database with sorting.
@@ -23,6 +24,7 @@ class ReferenceRepository:
         Returns:
             List[Reference]: List of Reference objects.
         """
+
         if sort_by not in {"title", "authors", "year"}:
             sort_by = "title"
 
@@ -38,6 +40,7 @@ class ReferenceRepository:
         references = result.mappings().all()
 
         return [Reference(reference) for reference in references]
+
 
     def get_reference_by_id(self, reference_id):
         """
@@ -57,8 +60,8 @@ class ReferenceRepository:
 
         return [Reference(reference)]
 
+
     def create_reference(self, form_data):
-        
         """
         Function for creating a reference
 
@@ -76,12 +79,32 @@ class ReferenceRepository:
         self.db.session.execute(sql, form_data)
         self.db.session.commit()
 
-    def remove_reference(self, reference_id):
+
+    def update_reference(self, reference_id, form_data):
+        """
+        Function for updating a reference
+        """
+
+        columns = list(form_data.keys())
+        placeholders = [f":{col}" for col in columns]
+
+
+        # Maybe works...
+        sql = text(f"""
+            UPDATE reference_entries
+            SET {', '.join([f"{col} = {placeholder}" for col, placeholder in zip(columns, placeholders)])}
+            WHERE id = (:reference_id)
+        """)
+
+        self.db.session.execute(sql, form_data, {"reference_id":reference_id})
+        self.db.session.commit()
         
+
+    def remove_reference(self, reference_id):
         """
         Function for removing a reference from the database
-
         """
+        
         sql = text(
             """
             DELETE FROM reference_entries WHERE id = :id
