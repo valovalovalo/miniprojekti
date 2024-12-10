@@ -156,10 +156,10 @@ def update(reference_id):
         try:
             reference_repo.update_reference(reference_id, request.form.to_dict())
             flash("Reference updated successfully")
-            return redirect("/")
+            return redirect(f"/reference/{reference_id}")
         except Exception as e:
             flash(f"Error updating reference: {str(e)}")
-            return redirect("/")
+            return redirect(f"/reference/{reference_id}")
     return render_template("update_reference.html", reference_id=reference_id)
 
 
