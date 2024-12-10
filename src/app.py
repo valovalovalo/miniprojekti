@@ -52,6 +52,25 @@ def get_form_fields(reference_type):
 
     return jsonify(fields)
 
+@app.route("/update-form/<reference_id>", methods=["GET"])
+def get_update_form(reference_id):
+    reference_to_update = reference_repo.get_reference_by_id(reference_id)
+    factory = reference_repo.factories.get(reference_to_update.data["entry_type"])
+    if not factory:
+        return jsonify({"error": "Invalid reference type"}), 400
+
+    form = factory.create_form(reference_to_update.get_data())
+    fields = [
+        {
+            "name": field.name,
+            "label": field.label.text,
+            "required": bool(field.validators),
+            "default": field.data
+        }
+        for field in form
+    ]
+
+    return jsonify(fields)
 
 @app.route("/bibtex")
 def bibtex():
@@ -77,7 +96,7 @@ def get_reference(reference_id):
 
     reference = reference_repo.get_reference_by_id(reference_id)
 
-    return render_template("reference.html", reference=reference[0])
+    return render_template("reference.html", reference=reference)
 
 
 @app.route("/new_reference")

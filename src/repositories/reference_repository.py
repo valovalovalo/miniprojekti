@@ -58,7 +58,7 @@ class ReferenceRepository:
         query_result = self.db.session.execute(query, {"reference_id": reference_id})
         reference = query_result.mappings().first()
 
-        return [Reference(reference)]
+        return Reference(reference)
 
 
     def create_reference(self, form_data):
