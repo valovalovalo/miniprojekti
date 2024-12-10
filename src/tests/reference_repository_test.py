@@ -57,3 +57,15 @@ class TestReferenceRepository(unittest.TestCase):
 
         self.mock_db.session.execute.assert_called_once()
         self.mock_db.session.commit.assert_called_once()
+
+    def test_reference_update_works(self):
+        test_input = {
+            "entry_type": "book",
+            "title": "Vuonna 1984",
+            "authors": "George Orwell",
+            "year": "1949"
+            }
+        self.repo.update_reference(1, test_input)
+
+        self.mock_db.session.execute.assert_called_once()
+        self.mock_db.session.commit.assert_called_once()

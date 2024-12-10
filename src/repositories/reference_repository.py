@@ -1,17 +1,19 @@
 from sqlalchemy import text
 
 from config import db
+from entities.factories import (ArticleFormFactory, BookFormFactory,
+                                InproceedingsFormFactory)
 from entities.reference import Reference
-from entities.factories import BookFormFactory, ArticleFormFactory, InproceedingsFormFactory
 
 
 class ReferenceRepository:
     def __init__(self, database):
         self.db = database
-        self.factories = {"book": BookFormFactory(),
-                          "article": ArticleFormFactory(),
-                          "inproceedings": InproceedingsFormFactory()}
-
+        self.factories = {
+            "book": BookFormFactory(),
+            "article": ArticleFormFactory(),
+            "inproceedings": InproceedingsFormFactory(),
+        }
 
     def get_references(self, sort_by="title", order="asc"):
         """
@@ -31,16 +33,17 @@ class ReferenceRepository:
         if order not in {"asc", "desc"}:
             order = "asc"
 
-        sql = text(f"""
+        sql = text(
+            f"""
             SELECT * FROM reference_entries
             ORDER BY {sort_by} {order}
-        """)
+        """
+        )
 
         result = self.db.session.execute(sql)
         references = result.mappings().all()
 
         return [Reference(reference) for reference in references]
-
 
     def get_reference_by_id(self, reference_id):
         """
@@ -58,8 +61,7 @@ class ReferenceRepository:
         query_result = self.db.session.execute(query, {"reference_id": reference_id})
         reference = query_result.mappings().first()
 
-        return [Reference(reference)]
-
+        return Reference(reference)
 
     def create_reference(self, form_data):
         """
@@ -70,41 +72,38 @@ class ReferenceRepository:
         columns = list(form_data.keys())
         placeholders = [f":{col}" for col in columns]
 
-        sql = text(f"""
+        sql = text(
+            f"""
             INSERT INTO reference_entries
-            ({', '.join(columns)})
-            VALUES ({', '.join(placeholders)})
-        """)
+            ({", ".join(columns)})
+            VALUES ({", ".join(placeholders)})
+        """
+        )
 
         self.db.session.execute(sql, form_data)
         self.db.session.commit()
 
-
     def update_reference(self, reference_id, form_data):
-        """
-        Function for updating a reference
-        """
-
         columns = list(form_data.keys())
         placeholders = [f":{col}" for col in columns]
 
-
-        # Maybe works...
-        sql = text(f"""
+        sql = text(
+            f"""
             UPDATE reference_entries
-            SET {', '.join([f"{col} = {placeholder}" for col, placeholder in zip(columns, placeholders)])}
-            WHERE id = (:reference_id)
-        """)
+            SET {", ".join([f"{col} = {placeholder}" for col, placeholder in zip(columns, placeholders)])}
+            WHERE id = :reference_id
+        """
+        )
+        params = {**form_data, "reference_id": reference_id}
 
-        self.db.session.execute(sql, form_data, {"reference_id":reference_id})
+        self.db.session.execute(sql, params)
         self.db.session.commit()
-        
 
     def remove_reference(self, reference_id):
         """
         Function for removing a reference from the database
         """
-        
+
         sql = text(
             """
             DELETE FROM reference_entries WHERE id = :id

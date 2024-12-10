@@ -26,8 +26,10 @@ def index():
     sort_by = request.args.get("sort", "title")  # default "title"
     order = request.args.get("order", "asc")  # default "asc"
     references = reference_repo.get_references(sort_by=sort_by, order=order)
-    
-    return render_template("index.html", references=references, sort=sort_by, order=order)
+
+    return render_template(
+        "index.html", references=references, sort=sort_by, order=order
+    )
 
 
 @app.route("/input-form/<reference_type>", methods=["GET"])
@@ -46,6 +48,27 @@ def get_form_fields(reference_type):
             "name": field.name,
             "label": field.label.text,
             "required": bool(field.validators),
+        }
+        for field in form
+    ]
+
+    return jsonify(fields)
+
+
+@app.route("/update-form/<reference_id>", methods=["GET"])
+def get_update_form(reference_id):
+    reference_to_update = reference_repo.get_reference_by_id(reference_id)
+    factory = reference_repo.factories.get(reference_to_update.data["entry_type"])
+    if not factory:
+        return jsonify({"error": "Invalid reference type"}), 400
+
+    form = factory.create_form(reference_to_update.get_data())
+    fields = [
+        {
+            "name": field.name,
+            "label": field.label.text,
+            "required": bool(field.validators),
+            "default": field.data,
         }
         for field in form
     ]
@@ -77,7 +100,7 @@ def get_reference(reference_id):
 
     reference = reference_repo.get_reference_by_id(reference_id)
 
-    return render_template("reference.html", reference=reference[0])
+    return render_template("reference.html", reference=reference)
 
 
 @app.route("/new_reference")
@@ -99,7 +122,7 @@ def new():
 def reference_creation():
     """
     Gets form data in a dict, passes it to create_reference function
-    
+
     """
 
     form_data = dict(request.form)
@@ -117,7 +140,7 @@ def remove_reference(reference_id):
     """
     Function for removing a reference, redirect to home page
     """
-    
+
     try:
         reference_repo.remove_reference(reference_id)
         flash("Reference succesfully deleted")
@@ -125,15 +148,19 @@ def remove_reference(reference_id):
     except Exception as error:
         flash(str(error))
         return redirect("/")
-    
 
-@app.route("/update_reference/<reference_id>", methods=["POST"])
+
+@app.route("/update_reference/<reference_id>", methods=["GET", "POST"])
 def update(reference_id):
-    """
-    TBD, function for updating reference data
-    """
-
-    return render_template("/update_reference.html")
+    if request.method == "POST":
+        try:
+            reference_repo.update_reference(reference_id, request.form.to_dict())
+            flash("Reference updated successfully")
+            return redirect("/")
+        except Exception as e:
+            flash(f"Error updating reference: {str(e)}")
+            return redirect("/")
+    return render_template("update_reference.html", reference_id=reference_id)
 
 
 # Route for testing
