@@ -6,6 +6,8 @@ Edit reference
 {% block body %}
 <h2>Update reference</h2>
 
+<a href="{{ url_for('get_reference', reference_id=reference_id) }}" style="display:block; margin-bottom: 10px;">Cancel update</a>
+
 {% with messages = get_flashed_messages() %}
   {% if messages %}
     <ul>
