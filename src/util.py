@@ -15,7 +15,7 @@ def validate_reference(entry_type, title, authors, year):
     Raises:
         UserInputError: If any field fails validation.
     """
-    
+
     if not entry_type or len(entry_type.strip()) == 0:
         raise UserInputError("Entry type cannot be empty.")
     if not title or len(title.strip()) == 0:

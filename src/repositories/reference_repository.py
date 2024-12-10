@@ -75,8 +75,8 @@ class ReferenceRepository:
         sql = text(
             f"""
             INSERT INTO reference_entries
-            ({', '.join(columns)})
-            VALUES ({', '.join(placeholders)})
+            ({", ".join(columns)})
+            VALUES ({", ".join(placeholders)})
         """
         )
 
@@ -90,7 +90,7 @@ class ReferenceRepository:
         sql = text(
             f"""
             UPDATE reference_entries
-            SET {', '.join([f"{col} = {placeholder}" for col, placeholder in zip(columns, placeholders)])}
+            SET {", ".join([f"{col} = {placeholder}" for col, placeholder in zip(columns, placeholders)])}
             WHERE id = :reference_id
         """
         )
