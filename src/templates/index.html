@@ -22,7 +22,7 @@
   <thead>
     <tr>
       <th>
-        <a href="/?sort=title&order={{ 'desc' if sort == 'title' and order == 'asc' else 'asc' }}" style="color: black; text-decoration: none;">
+        <a href="/?sort=title&order={{ 'desc' if sort == 'title' and order == 'asc' else 'asc' }}">
           Title
           {% if sort == 'title' %}
             {% if order == 'asc' %}
@@ -34,7 +34,7 @@
         </a>
       </th>
       <th>
-        <a href="/?sort=authors&order={{ 'desc' if sort == 'authors' and order == 'asc' else 'asc' }}" style="color: black; text-decoration: none;">
+        <a href="/?sort=authors&order={{ 'desc' if sort == 'authors' and order == 'asc' else 'asc' }}">
           Authors
           {% if sort == 'authors' %}
             {% if order == 'asc' %}
@@ -46,7 +46,7 @@
         </a>
       </th>
       <th>
-        <a href="/?sort=year&order={{ 'desc' if sort == 'year' and order == 'asc' else 'asc' }}" style="color: black; text-decoration: none;">
+        <a href="/?sort=year&order={{ 'desc' if sort == 'year' and order == 'asc' else 'asc' }}">
           Year
           {% if sort == 'year' %}
             {% if order == 'asc' %}
