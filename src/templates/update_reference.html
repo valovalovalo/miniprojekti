@@ -6,6 +6,8 @@ Edit reference
 {% block body %}
 <h2>Update reference</h2>
 
+<a href="javascript:history.back()" style="display: block; margin-bottom: 15px;"> Cancel update </a>
+
 {% with messages = get_flashed_messages() %}
   {% if messages %}
     <ul>
