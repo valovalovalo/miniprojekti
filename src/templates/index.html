@@ -8,7 +8,14 @@
 
 <h2>Reference Manager app</h2>
 
-<table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%;">
+<div style="margin-bottom: 20px;">
+  <form method="get" action="/">
+    <input type="text" name="search" placeholder="Search by title or author" value="{{ search|default('') }}" style="padding: 5px; width: 300px;">
+    <button type="submit" style="padding: 5px;">Search</button>
+  </form>
+</div>
+
+<table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%; margin-top: 20px;">
   <thead>
     <tr>
       <th>

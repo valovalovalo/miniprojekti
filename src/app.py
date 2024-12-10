@@ -14,25 +14,27 @@ from repositories.reference_repository import reference_repo
 @app.route("/")
 def index():
     """
-    Render the index page.
-
-    ---
-
-    Fetches all references from the database using `get_references` and
-    passes them to the "index.html" template for rendering.
-
-    ---
-
-    Returns:
-        Response: Rendered HTML page with a list of references.
+    Render the index page with optional search functionality.
     """
-
-
-    sort_by = request.args.get("sort", "title")  # Oletuksena "title"
-    order = request.args.get("order", "asc")  # Oletuksena "asc"
+    sort_by = request.args.get("sort", "title")
+    order = request.args.get("order", "asc")
+    search_query = request.args.get("search", "").lower()
     references = reference_repo.get_references(sort_by=sort_by, order=order)
-    
-    return render_template("index.html", references=references, sort=sort_by, order=order)
+
+    if search_query:
+        references = [
+            ref for ref in references
+            if search_query in ref.data.get('title', '').lower() or
+               search_query in ref.data.get('authors', '').lower()  
+        ]
+
+    return render_template(
+        "index.html",
+        references=references,
+        sort=sort_by,
+        order=order,
+        search=search_query
+    )
 
 
 @app.route("/input-form/<reference_type>", methods=["GET"])
