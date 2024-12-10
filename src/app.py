@@ -26,8 +26,10 @@ def index():
     sort_by = request.args.get("sort", "title")  # default "title"
     order = request.args.get("order", "asc")  # default "asc"
     references = reference_repo.get_references(sort_by=sort_by, order=order)
-    
-    return render_template("index.html", references=references, sort=sort_by, order=order)
+
+    return render_template(
+        "index.html", references=references, sort=sort_by, order=order
+    )
 
 
 @app.route("/input-form/<reference_type>", methods=["GET"])
@@ -52,6 +54,7 @@ def get_form_fields(reference_type):
 
     return jsonify(fields)
 
+
 @app.route("/update-form/<reference_id>", methods=["GET"])
 def get_update_form(reference_id):
     reference_to_update = reference_repo.get_reference_by_id(reference_id)
@@ -65,12 +68,13 @@ def get_update_form(reference_id):
             "name": field.name,
             "label": field.label.text,
             "required": bool(field.validators),
-            "default": field.data
+            "default": field.data,
         }
         for field in form
     ]
 
     return jsonify(fields)
+
 
 @app.route("/bibtex")
 def bibtex():
@@ -118,7 +122,7 @@ def new():
 def reference_creation():
     """
     Gets form data in a dict, passes it to create_reference function
-    
+
     """
 
     form_data = dict(request.form)
@@ -136,7 +140,7 @@ def remove_reference(reference_id):
     """
     Function for removing a reference, redirect to home page
     """
-    
+
     try:
         reference_repo.remove_reference(reference_id)
         flash("Reference succesfully deleted")
@@ -144,15 +148,19 @@ def remove_reference(reference_id):
     except Exception as error:
         flash(str(error))
         return redirect("/")
-    
 
-@app.route("/update_reference/<reference_id>", methods=["POST"])
+
+@app.route("/update_reference/<reference_id>", methods=["GET", "POST"])
 def update(reference_id):
-    """
-    TBD, function for updating reference data
-    """
-
-    return render_template("/update_reference.html")
+    if request.method == "POST":
+        try:
+            reference_repo.update_reference(reference_id, request.form.to_dict())
+            flash("Reference updated successfully")
+            return redirect("/")
+        except Exception as e:
+            flash(f"Error updating reference: {str(e)}")
+            return redirect("/")
+    return render_template("update_reference.html", reference_id=reference_id)
 
 
 # Route for testing
