@@ -1,7 +1,11 @@
 {% macro button(text, type='button') %}
-    <div class="mt-6">
-        <button type="{{ type }}" class="text-k-white bg-k-darkestblue hover:bg-k-darkblue focus:ring-2 focus:ring-k-beige font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 border border-k-white focus:outline-none">
-            {{ text }}
-        </button>
-    </div>
+    <button type="{{ type }}" class="text-k-white bg-k-darkestblue hover:bg-k-darkblue focus:ring-2 focus:ring-k-beige font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 border border-k-white focus:outline-none">
+        {{ text }}
+    </button>
+{% endmacro %}
+
+{% macro link(text, type='button', url='') %}
+    <a href="{{ url }}" class="text-k-white bg-k-darkestblue hover:bg-k-darkblue focus:ring-2 focus:ring-k-beige font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 border border-k-white focus:outline-none">
+        {{ text }}
+    </a>
 {% endmacro %}
