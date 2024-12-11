@@ -1,14 +1,11 @@
+{% import 'elements/button.html' as btn %}
 {% extends "layout.html" %}
 
 {% block title %}
-  Reference Manager
+  Reference
 {% endblock %}
 
 {% block body %}
-
-<h2>Reference Manager app</h2>
-
-<a href="/"> Back to home page </a>
 
 <ul>
   {% if reference %}
@@ -45,16 +42,16 @@
         <strong>Publisher:</strong> {{ reference['data']['publisher'] }}<br>
       </li>
     {% endif %}
-    <form action="/remove_reference/{{ reference['data']['id'] }}" method="POST" style="margin-top: 20px;">
-      <button type="submit" style="background-color: rgb(250, 249, 249); color: rgb(8, 8, 8); border: 2px solid black; padding: 10px; cursor: pointer;">
-        Delete this reference
-      </button>
-    </form>
-    <form action="/update_reference/{{ reference['data']['id'] }}" method="GET" style="margin-top: 20px;">
-      <button type="submit" style="background-color: rgb(250, 249, 249); color: rgb(8, 8, 8); border: 2px solid black; padding: 10px; cursor: pointer;">
-        Edit this reference
-      </button>
-    </form>
+    <div class="flex space-x-4 mt-4">
+      <form action="/update_reference/{{ reference['data']['id'] }}" method="GET">
+          {{ btn.button('Edit This Reference', type='submit') }}
+      </form>
+  
+      <form action="/remove_reference/{{ reference['data']['id'] }}" method="POST">
+          {{ btn.button('Delete This Reference', type='submit') }}
+      </form>
+    </div>
+
   {% endif %}
 </ul>
 
