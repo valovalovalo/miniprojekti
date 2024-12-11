@@ -6,9 +6,72 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <title>{% block title %}{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'k': {
+                'gray': '#babbbd',
+                'darkestblue': '#1f1f28',
+                'darkblue': '#2a2a37',
+                'blue': '#29526e',
+                'beige': '#e6c384',
+                'white': '#dcd7ba',
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <title>Bibmanager - {% block title %}{% endblock %}</title>
   </head>
-  <body>
-    {% block body %}{% endblock %}
+  <body class="bg-k-darkblue text-k-beige min-h-screen flex flex-col">
+
+    <header>
+      <div class="relative bg-k-darkestblue border-b border-gray-900">
+        <div class="flex flex-col items-center px-4 py-6 sm:px-6">
+          <nav class="flex flex-col items-center space-y-2">
+            <a href="/" class="text-3xl text-k-beige hover:text-k-white">Bibmanager</a>
+            <div class="flex space-x-4">
+              <a href="/new_reference" class="text-sm text-k-beige hover:text-k-white">Create a new reference</a>
+              <a href="/bibtex" class="text-sm text-k-beige hover:text-k-white">Export Bibtex</a>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-grow">
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="bg-k-blue border border-gray-900 text-k-white px-4 py-3 sm:rounded-lg shadow-lg max-w-md mx-auto my-4">
+            <ul class="space-y-2 text-center">
+              {% for message in messages %}
+                <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      {% endwith %}
+
+
+      <div class="max-w-7xl w-full mx-auto my-6 sm:px-6 lg:px-8 space-y-6">
+        <div class="bg-k-darkestblue shadow-lg sm:rounded-lg border border-gray-900">
+          <div class="p-4 sm:p-8 ">
+            {% block body %}{% endblock %}
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="bg-k-darkestblue border-t border-gray-900">
+      <div class="p-4 text-center text-k-white">
+        <a href="https://github.com/valovalovalo/miniprojekti" class="text-sm">© 2025 valovalovalo <span class="text-xs">MIT License</span></a>
+      </div>
+    </footer>
+  
   </body>
 </html>
