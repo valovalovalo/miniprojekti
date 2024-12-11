@@ -6,16 +6,6 @@ Create a new reference
 {% block body %}
 <h2>Create a new reference</h2>
 
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul>
-    {% for message in messages %}
-      <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
-
 <form id="referenceForm" action="/create_reference" method="post">
   <div class="form-group">
     <label for="entry_type">Type:</label>
