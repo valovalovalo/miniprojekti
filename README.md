@@ -1,9 +1,9 @@
 ![Banner](src/assets/banner.png)
 
-![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=Flask&logoColor=white)
-![Javascript](https://shields.io/badge/JavaScript-F7DF1E?logo=JavaScript&logoColor=000&style=flat-square)
-![Shell](https://img.shields.io/badge/Shell-4EAA25?&style=plastic&logo=gnu-bash&logoColor=white)
+[![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=Flask&logoColor=white)](https://flask.palletsprojects.com/en/stable/)
+[![Javascript](https://shields.io/badge/JavaScript-F7DF1E?logo=JavaScript&logoColor=000&style=flat-square)](https://www.javascript.com/)
+[![Shell](https://img.shields.io/badge/Shell-4EAA25?&style=plastic&logo=gnu-bash&logoColor=white)]()
 [![GHA workflow badge](https://github.com/valovalovalo/miniprojekti/workflows/CI/badge.svg)](https://github.com/valovalovalo/miniprojekti/actions)
 [![codecov](https://codecov.io/gh/valovalovalo/miniprojekti/graph/badge.svg?token=DIS78IN4YX)](https://codecov.io/gh/valovalovalo/miniprojekti)
 
@@ -48,3 +48,5 @@ python src/index.py
 ```
 
 The application will be accessible at http://localhost:5001.
+
+# License
