@@ -48,5 +48,3 @@ python src/index.py
 ```
 
 The application will be accessible at http://localhost:5001.
-
-# License
