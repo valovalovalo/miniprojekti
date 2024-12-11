@@ -21,5 +21,5 @@ Delete Reference After Creation
     Page Should Contain  test3
     Go To  ${HOME_URL}
     Click Link  View reference
-    Click Button  Delete this reference
+    Click Button  Delete This Reference
     Page Should Not Contain  test3
