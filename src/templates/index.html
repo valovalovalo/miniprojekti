@@ -1,12 +1,10 @@
 {% extends "layout.html" %}
 
 {% block title %}
-  Reference Manager
+  Index
 {% endblock %}
 
 {% block body %}
-
-<h2>Reference Manager app</h2>
 
 <div style="margin-bottom: 20px;">
   <form method="get" action="/" style="display: inline;">
@@ -28,11 +26,11 @@
   {% endif %}
 {% endwith %}
 
-<table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%; margin-top: 20px;">
+<table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%;">
   <thead>
     <tr>
       <th>
-        <a href="/?sort=title&order={{ 'desc' if sort == 'title' and order == 'asc' else 'asc' }}" style="color: black; text-decoration: none;">
+        <a href="/?sort=title&order={{ 'desc' if sort == 'title' and order == 'asc' else 'asc' }}">
           Title
           {% if sort == 'title' %}
             {% if order == 'asc' %}
@@ -44,7 +42,7 @@
         </a>
       </th>
       <th>
-        <a href="/?sort=authors&order={{ 'desc' if sort == 'authors' and order == 'asc' else 'asc' }}" style="color: black; text-decoration: none;">
+        <a href="/?sort=authors&order={{ 'desc' if sort == 'authors' and order == 'asc' else 'asc' }}">
           Authors
           {% if sort == 'authors' %}
             {% if order == 'asc' %}
@@ -56,7 +54,7 @@
         </a>
       </th>
       <th>
-        <a href="/?sort=year&order={{ 'desc' if sort == 'year' and order == 'asc' else 'asc' }}" style="color: black; text-decoration: none;">
+        <a href="/?sort=year&order={{ 'desc' if sort == 'year' and order == 'asc' else 'asc' }}">
           Year
           {% if sort == 'year' %}
             {% if order == 'asc' %}
@@ -83,13 +81,5 @@
     {% endfor %}
   </tbody>
 </table>
-
-<div style="margin-top: 20px;">
-  <a href="/new_reference">Create a new reference</a>
-</div>
-
-<div style="margin-top: 20px;">
-  <a href="/bibtex">Export Bibtex</a>
-</div>
 
 {% endblock %}

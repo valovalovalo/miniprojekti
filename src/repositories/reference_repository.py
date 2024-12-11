@@ -83,6 +83,10 @@ class ReferenceRepository:
         self.db.session.execute(sql, form_data)
         self.db.session.commit()
 
+        result = self.db.session.execute(text("SELECT LASTVAL()"))
+        reference_id = result.scalar()
+        return reference_id
+
     def update_reference(self, reference_id, form_data):
         columns = list(form_data.keys())
         placeholders = [f":{col}" for col in columns]

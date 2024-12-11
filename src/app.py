@@ -140,8 +140,8 @@ def reference_creation():
     form_data = dict(request.form)
 
     try:
-        reference_repo.create_reference(form_data)
-        return redirect("/")
+        reference_id = reference_repo.create_reference(form_data)
+        return redirect(f"/reference/{reference_id}")
     except Exception as error:
         flash(str(error))
         return redirect("/new_reference")
