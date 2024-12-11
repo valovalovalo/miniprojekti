@@ -8,7 +8,6 @@ Lue [täältä](https://ohjelmistotuotanto-hy.github.io/flask/) lisää.
 
 [Backlog](https://github.com/orgs/valovalovalo/projects/1)
 [Definition of Done](https://github.com/valovalovalo/miniprojekti/wiki/Definition-Of-Done)
-[Coverageraportti](https://maza.kapsi.fi/miniprojekticoverage/)
 
 ## Asentaminen
 
