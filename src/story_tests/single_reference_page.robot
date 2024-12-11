@@ -27,7 +27,6 @@ Test If Single Page View Works
     Input Text  authors  Lassi
     Input Text  year  2000
     Click Button  Create Reference
-    Click Link  View reference
     Page Should Contain  Taru sormusten herrasta
     Page Should Contain  Lassi
     Page Should Contain  2000
