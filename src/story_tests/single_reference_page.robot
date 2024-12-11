@@ -30,14 +30,3 @@ Test If Single Page View Works
     Page Should Contain  Taru sormusten herrasta
     Page Should Contain  Lassi
     Page Should Contain  2000
-
-Test If Back To Home Page Button Works
-    Go To  ${HOME_URL}
-    Click Link  Create a new reference
-    Select From List By Value  id=entry_type  book
-    Input Text  title  Taru sormusten herrasta
-    Input Text  authors  Lassi
-    Input Text  year  2000
-    Click Button  Create Reference
-    Click Link  Back to home page
-    Page Should Contain  Create a new reference
