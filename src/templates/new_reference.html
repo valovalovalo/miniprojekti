@@ -1,3 +1,4 @@
+{% import 'elements/button.html' as btn %}
 {% extends "layout.html" %}
 {% block title %}
 Create a new reference
@@ -6,8 +7,8 @@ Create a new reference
 {% block body %}
 <form id="referenceForm" action="/create_reference" method="post">
   <div class="form-group">
-    <label for="entry_type">Type:</label>
-    <select name="entry_type" id="entry_type" required>
+    <label class="block text-sm/6 font-medium" for="entry_type">Type:</label>
+    <select name="entry_type" id="entry_type" class="mt-2 rounded-md bg-k-darkblue text-k-white outline outline-1 outline-k-white px-3 py-1.5" required>
       <option value="">Select a type...</option>
       <option value="article">Article</option>
       <option value="book">Book</option>
@@ -18,8 +19,7 @@ Create a new reference
   <div id="dynamicFields">
     <!-- Form kentät tulee tähän -->
   </div>
-
-  <button type="submit">Create Reference</button>
+  {{ btn.button('Create Reference', type='submit') }}
 </form>
 
 <script>
@@ -41,22 +41,29 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       
       const fields = await response.json();
-      let formHTML = '';
-      
+      let formHTML = '<div class="mt-10 grid gap-x-6 gap-y-8 sgrid-cols-1">';
+   
       fields.forEach(field => {
         formHTML += `
           <div class="form-group">
-            <label for="${field.name}">${field.label}:</label>
-            <input 
-              type="${field.name === 'year' ? 'number' : 'text'}"
-              name="${field.name}"
-              id="${field.name}"
-              ${field.required ? 'required' : ''}
-              ${field.name === 'year' ? 'min="-1900" max="2024"' : ''}
-            >
+            <label class="block text-sm/6 font-medium" for="${field.name}">${field.label}:</label>
+            <div class="mt-2">
+              <input 
+                class="block w-full rounded-md bg-k-darkblue text-k-white outline outline-1 outline-k-white px-3 py-1.5"
+                type="${field.name === 'year' ? 'number' : 'text'}"
+                name="${field.name}"
+                id="${field.name}"
+                ${field.required ? 'required' : ''}
+                ${field.name === 'year' ? 'min="-1900" max="2024"' : ''}
+              >
+            </div>
           </div>
         `;
       });
+
+      formHTML += `
+      </div>
+    `;
       
       dynamicFields.innerHTML = formHTML;
     } catch (error) {

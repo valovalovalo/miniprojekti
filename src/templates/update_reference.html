@@ -1,3 +1,4 @@
+{% import 'elements/button.html' as btn %}
 {% extends "layout.html" %}
 {% block title %}
 Edit reference
@@ -11,7 +12,7 @@ Edit reference
   <div id="dynamicFields">
     <!-- Form fields here -->
   </div>
-  <button type="submit">Update Reference</button>
+  {{ btn.button('Update Reference', type='submit') }}
 </form>
 <script>
 document.addEventListener('DOMContentLoaded', async function() {
@@ -27,7 +28,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     const fields = await response.json();
     console.log('Received fields:', fields); // Debug log
     
-    let formHTML = '';
+    let formHTML = '<div class="mt-10 grid gap-x-6 gap-y-8 sgrid-cols-1">';
     
     fields.forEach(field => {
       const defaultValue = field.default !== undefined ? field.default : '';
@@ -35,18 +36,25 @@ document.addEventListener('DOMContentLoaded', async function() {
       
       formHTML += `
         <div class="form-group">
-          <label for="${field.name}">${field.label}:</label>
-          <input 
-            type="${field.name === 'year' ? 'number' : 'text'}"
-            name="${field.name}"
-            id="${field.name}"
-            value="${defaultValue}"
-            ${field.required ? 'required' : ''}
-            ${field.name === 'year' ? 'min="-1900" max="2024"' : ''}
-          >
+          <label class="block text-sm/6 font-medium" for="${field.name}">${field.label}:</label>
+          <div class="mt-2">
+            <input 
+              class="block w-full rounded-md bg-k-darkblue text-k-white outline outline-1 outline-k-white px-3 py-1.5"
+              type="${field.name === 'year' ? 'number' : 'text'}"
+              name="${field.name}"
+              id="${field.name}"
+              value="${defaultValue}"
+              ${field.required ? 'required' : ''}
+              ${field.name === 'year' ? 'min="-1900" max="2024"' : ''}
+            >
+          </div>
         </div>
       `;
     });
+
+    formHTML += `
+      </div>
+    `;
     
     dynamicFields.innerHTML = formHTML;
   } catch (error) {
