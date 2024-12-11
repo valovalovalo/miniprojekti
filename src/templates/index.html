@@ -9,7 +9,7 @@
 <table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%;">
   <thead>
     <tr>
-      <th>
+      <th class="text-left text-k-gray">
         <a href="/?sort=title&order={{ 'desc' if sort == 'title' and order == 'asc' else 'asc' }}">
           Title
           {% if sort == 'title' %}
@@ -21,7 +21,7 @@
           {% endif %}
         </a>
       </th>
-      <th>
+      <th class="text-left text-k-gray">
         <a href="/?sort=authors&order={{ 'desc' if sort == 'authors' and order == 'asc' else 'asc' }}">
           Authors
           {% if sort == 'authors' %}
@@ -33,7 +33,7 @@
           {% endif %}
         </a>
       </th>
-      <th>
+      <th class="text-left text-k-gray">
         <a href="/?sort=year&order={{ 'desc' if sort == 'year' and order == 'asc' else 'asc' }}">
           Year
           {% if sort == 'year' %}
@@ -45,7 +45,7 @@
           {% endif %}
         </a>
       </th>
-      <th>Actions</th>
+      <th class="text-left text-k-gray">Actions</th>
     </tr>
   </thead>
   <tbody>

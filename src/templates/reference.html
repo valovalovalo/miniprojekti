@@ -42,16 +42,21 @@
         <strong>Publisher:</strong> {{ reference['data']['publisher'] }}<br>
       </li>
     {% endif %}
-    <div class="flex space-x-4 mt-4">
-      <form action="/update_reference/{{ reference['data']['id'] }}" method="GET">
-          {{ btn.button('Edit This Reference', type='submit') }}
-      </form>
-  
-      <form action="/remove_reference/{{ reference['data']['id'] }}" method="POST">
-          {{ btn.button('Delete This Reference', type='submit') }}
-      </form>
-    </div>
+<div class="flex space-x-4 mt-4">
 
+  <form action="/update_reference/{{ reference['data']['id'] }}" method="GET">
+    {{ btn.button('Edit This Reference', type='submit') }}
+  </form>
+
+  <form action="/remove_reference/{{ reference['data']['id'] }}" method="POST">
+    {{ btn.button('Delete This Reference', type='submit', variant='delete') }}
+  </form>
+
+  <form action="/" method="GET">
+    {{ btn.button('Back to List', type='submit') }}
+  </form>
+
+</div>
   {% endif %}
 </ul>
 
