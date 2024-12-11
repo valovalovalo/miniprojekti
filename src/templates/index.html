@@ -9,9 +9,12 @@
 <h2>Reference Manager app</h2>
 
 <div style="margin-bottom: 20px;">
-  <form method="get" action="/">
+  <form method="get" action="/" style="display: inline;">
     <input type="text" name="search" placeholder="Search by title or author" value="{{ search|default('') }}" style="padding: 5px; width: 300px;">
     <button type="submit" style="padding: 5px;">Search</button>
+  </form>
+  <form method="get" action="/" style="display: inline;">
+    <button type="submit" style="padding: 5px;">Clear</button>
   </form>
 </div>
 
