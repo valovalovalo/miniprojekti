@@ -47,10 +47,12 @@ class TestReferenceRepository(unittest.TestCase):
             "authors": "George Orwell",
             "year": "1949"
             }
-        self.repo.create_reference(test_input)
+        
+        self.mock_db.session.execute.return_value.scalar.return_value = 1
+        
+        reference_id = self.repo.create_reference(test_input)
 
-        self.mock_db.session.execute.assert_called_once()
-        self.mock_db.session.commit.assert_called_once()
+        self.assertEqual(reference_id, 1)
 
     def test_reference_delete_works(self):
         self.repo.remove_reference(1)
