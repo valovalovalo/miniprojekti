@@ -1,22 +1,11 @@
 {% extends "layout.html" %}
 
 {% block title %}
-  Reference Manager
+  Index view
 {% endblock %}
 
 {% block body %}
 
-<h2>Reference Manager app</h2>
-
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul>
-    {% for message in messages %}
-      <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
 
 <table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%;">
   <thead>
