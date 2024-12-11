@@ -27,21 +27,21 @@ After Adding A Reference, Site Displays It 2
     Page Should Contain  test2
 
 Test Title Sorting
-    [Documentation]    Varmistaa, että viitteet lajitellaan nimen mukaan.
+    [Documentation]    Checks, that references are sorted by name
     Go To  ${HOME_URL}
     Maximize Browser Window
     Sort References By Title Ascending
     Verify Sorted By Title Ascending
 
 Test Author Sorting
-    [Documentation]    Varmistaa, että viitteet lajitellaan kirjoittajan mukaan.
+    [Documentation]    Check that references are sorted by author
     Go To  ${HOME_URL}
     Maximize Browser Window
     Sort References By Authors Ascending
     Verify Sorted By Authors Ascending
 
 Test Year Sorting
-    [Documentation]    Varmistaa, että viitteet lajitellaan vuoden mukaan.
+    [Documentation]    Checks that references are sorted by year
     Go To  ${HOME_URL}
     Maximize Browser Window
     Sort References By Year Ascending
@@ -49,19 +49,19 @@ Test Year Sorting
 
 *** Keywords ***
 Sort References By Title Ascending
-    [Documentation]    Klikkaa Title-sarakkeen otsikkoa järjestääksesi sen aakkosjärjestykseen nousevasti.
+    [Documentation]    Click title to sort by title
     Click Element    xpath=//a[contains(text(), 'Title')]
 
 Sort References By Authors Ascending
-    [Documentation]    Klikkaa Authors-sarakkeen otsikkoa järjestääksesi sen aakkosjärjestykseen nousevasti.
+    [Documentation]    Click authors to sort by author
     Click Element    xpath=//a[contains(text(), 'Authors')]
 
 Sort References By Year Ascending
-    [Documentation]    Klikkaa Year-sarakkeen otsikkoa järjestääksesi sen aakkosjärjestykseen nousevasti.
+    [Documentation]    Click year o sort by year
     Click Element    xpath=//a[contains(text(), 'Year')]
 
 Verify Sorted By Title Ascending
-    [Documentation]    Varmistaa, että viitteet on järjestetty nousevassa järjestyksessä title mukaan.
+    [Documentation]    Verifies, that the references are sorted by title
     ${titles}=    Get WebElements    xpath=//table/tbody/tr/td[1]
     ${previous}=    Set Variable    ${None}
     FOR    ${title}    IN    @{titles}
@@ -70,7 +70,7 @@ Verify Sorted By Title Ascending
     END
 
 Verify Sorted By Authors Ascending
-    [Documentation]    Varmistaa, että viitteet on järjestetty nousevassa järjestyksessä authors mukaan.
+    [Documentation]    Verifies, that the references are sorted by author
     ${authors}=    Get WebElements    xpath=//table/tbody/tr/td[2]
     ${previous}=    Set Variable    ${None}
     FOR    ${author}    IN    @{authors}
@@ -79,7 +79,7 @@ Verify Sorted By Authors Ascending
     END
 
 Verify Sorted By Year Ascending
-    [Documentation]    Varmistaa, että viitteet on järjestetty nousevassa järjestyksessä year mukaan.
+    [Documentation]    Verifies, that the references are sorted by year
     ${years}=    Get WebElements    xpath=//table/tbody/tr/td[3]
     ${previous}=    Set Variable    ${None}
     FOR    ${year}    IN    @{years}
