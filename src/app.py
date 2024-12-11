@@ -5,7 +5,6 @@ It handles the display, creation, and deletion of references in the system.
 """
 
 from flask import flash, jsonify, redirect, render_template, request
-
 from config import app, test_env
 from db_helper import reset_db
 from repositories.reference_repository import reference_repo
@@ -43,7 +42,6 @@ def index():
         order=order,
         search=search_query
     )
-
 
 
 @app.route("/input-form/<reference_type>", methods=["GET"])
