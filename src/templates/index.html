@@ -1,3 +1,4 @@
+{% import 'elements/button.html' as btn %}
 {% extends "layout.html" %}
 
 {% block title %}
@@ -5,6 +6,18 @@
 {% endblock %}
 
 {% block body %}
+
+<div class="mb-5 flex">
+  <form method="get" action="/"  class="flex-auto">
+    <div class="flex space-x-2">
+      <input type="text" name="search" placeholder="Search by title or author" value="{{ search|default('') }}" class="flex-1 mb-2 rounded-md bg-k-darkblue text-k-white outline outline-1 outline-k-white px-3 py-1.5">
+      <div class="flex-none">{{ btn.button('Search', type='submit') }}</div>
+    </div>
+  </form>
+  <form method="get" action="/"  class="flex-none">
+    <div>{{ btn.button('Clear', type='submit') }}</div>
+  </form>
+</div>
 
 <table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%;">
   <thead>

@@ -5,7 +5,6 @@ It handles the display, creation, and deletion of references in the system.
 """
 
 from flask import flash, jsonify, redirect, render_template, request
-
 from config import app, test_env
 from db_helper import reset_db
 from repositories.reference_repository import reference_repo
@@ -14,21 +13,34 @@ from repositories.reference_repository import reference_repo
 @app.route("/")
 def index():
     """
-    Render the index page.
+    Render the index page with optional search functionality.
 
     Fetches all references from the database using `get_references` and
-    passes them to the "index.html" template for rendering.
+    optionally filters them based on a search query. The results are
+    sorted and passed to the "index.html" template for rendering.
 
     Returns:
         Response: Rendered HTML page with a list of references.
     """
+    sort_by = request.args.get("sort", "title")
+    order = request.args.get("order", "asc")
+    search_query = request.args.get("search", "").lower()
 
-    sort_by = request.args.get("sort", "title")  # default "title"
-    order = request.args.get("order", "asc")  # default "asc"
     references = reference_repo.get_references(sort_by=sort_by, order=order)
 
+    if search_query:
+        references = [
+            ref for ref in references
+            if search_query in ref.data.get('title', '').lower() or
+               search_query in ref.data.get('authors', '').lower()
+        ]
+
     return render_template(
-        "index.html", references=references, sort=sort_by, order=order
+        "index.html",
+        references=references,
+        sort=sort_by,
+        order=order,
+        search=search_query
     )
 
 
