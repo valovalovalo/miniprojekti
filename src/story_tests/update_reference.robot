@@ -31,3 +31,32 @@ Add And Edit Book Reference
     Page Should Contain     Updated Author
     Page Should Contain     2023
     Page Should Contain     Updated Publisher
+
+Test For Pre-filling
+    Go To  ${HOME_URL}
+    Click Link  Create a new reference
+    Select From List By Value  id=entry_type  book
+    Input Text  title  booktest
+    Input Text  authors  book authors
+    Input Text  publisher  book publisher
+    Input Text  year  2000
+    Input Text  isbn  1234
+    Click Button  Create Reference
+    Page Should Contain  booktest
+    Click Button  Edit This Reference
+    ${title}=  Get Value  id=title
+    Should Be Equal  ${title}  booktest
+
+Test For Returning To Single Page View
+    Go To  ${HOME_URL}
+    Click Link  Create a new reference
+    Select From List By Value  id=entry_type  book
+    Input Text  title  booktest
+    Input Text  authors  book authors
+    Input Text  publisher  book publisher
+    Input Text  year  2000
+    Click Button  Create Reference
+    Click Button  Edit This Reference
+    Input Text  isbn  1234
+    Click Button  Update Reference
+    Page Should Contain  Edit This Reference
