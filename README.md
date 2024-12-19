@@ -25,6 +25,8 @@ Whether you're writing a research paper, managing bibliographies, or keeping tra
 
 [Definition of Done](https://github.com/valovalovalo/miniprojekti/wiki/Definition-Of-Done)
 
+[Loppuraportti](https://github.com/valovalovalo/miniprojekti/wiki/Loppuraportti)
+
 ## Installation
 
 **Requirements:** Python >=3.10.0, Poetry, and a PostgreSQL database.
